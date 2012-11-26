@@ -42,27 +42,28 @@ module Stepre
       # create hash from submitted form data
       new_hash = Stepre::Form.read_form_data(params_hash["form_data"])
       new_hash = Stepre::Form.format_hash(self.element, new_hash)
-      puts new_hash.inspect
+      puts "new_hash => #{new_hash.inspect}"
 
       # create hash from current step 
       old_hash = Stepre::Form.read_form_data(new_hash.delete("form_data"))
       old_hash = Stepre::Form.format_hash(self.element, old_hash)
-      puts old_hash.inspect
+      puts "old_hash => #{old_hash.inspect}"
 
       # previous button pressed?
       prev_button = !!new_hash.delete("prev_button")
 
       # find current step
-      step = self.steps.find(old_hash["step_id"])
+      raise "STEP NOT FOUND" unless step = self.steps.find(old_hash["step_id"])
+      step_attrs_array = step.attrs.map {|o| o.name}
 
       # merge in submitted form data 
-      merged_hash = Stepre::Form.merge_hash(old_hash, new_hash, prev_button, step.attrs.map {|o| o.name})
+      merged_hash = Stepre::Form.merge_hash(old_hash, new_hash, prev_button, step_attrs_array)
 
       # logic in eval can be moved to appropriate location later
       self.instance_eval(self.before_snippet) if self.before_snippet
 
       # run all validations on current step attrs
-      step.custom_validate(merged_hash) unless prev_button
+      step.custom_validate(merged_hash) unless prev_button or !step
 
       # create form object--vehicle for processed form data
       obj = OpenStruct.new(:valid => true)
