@@ -23,10 +23,15 @@ module Stepre
     end
 
     def map(&block)
-      # returns key val
-      #self.hash.map(&block)
-      # need only val
-      self.hash.values.map(&block)
+      begin
+        # returns key val
+        #self.hash.map(&block)
+        # need only val
+        self.hash.values.map(&block)
+      rescue => e
+        # raise e.inspect
+        []
+      end
     end
 
     def method_missing(m, *args, &block)

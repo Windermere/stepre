@@ -9,7 +9,7 @@ module Stepre
       else
         raise "config file not found"
       end
-      #raise @config_hash[form_id].inspect
+      #raise @config_hash.inspect
       @obj = Stepre.convert_hash(@config_hash[form_id])
     end
 
@@ -40,12 +40,14 @@ module Stepre
 
     def process_form_data(params_hash, options_array=[])
       # create hash from submitted form data
-      new_hash = Form.read_form_data(params_hash["form_data"])
-      new_hash = Form.format_hash(self.element, new_hash)
+      new_hash = Stepre::Form.read_form_data(params_hash["form_data"])
+      new_hash = Stepre::Form.format_hash(self.element, new_hash)
+      puts new_hash.inspect
 
       # create hash from current step 
-      old_hash = Form.read_form_data(new_hash.delete("form_data"))
-      old_hash = Form.format_hash(self.element, old_hash)
+      old_hash = Stepre::Form.read_form_data(new_hash.delete("form_data"))
+      old_hash = Stepre::Form.format_hash(self.element, old_hash)
+      puts old_hash.inspect
 
       # previous button pressed?
       prev_button = !!new_hash.delete("prev_button")
@@ -54,7 +56,7 @@ module Stepre
       step = self.steps.find(old_hash["step_id"])
 
       # merge in submitted form data 
-      merged_hash = Form.merge_hash(old_hash, new_hash, prev_button, step.attrs.map {|o| o.name})
+      merged_hash = Stepre::Form.merge_hash(old_hash, new_hash, prev_button, step.attrs.map {|o| o.name})
 
       # logic in eval can be moved to appropriate location later
       self.instance_eval(self.before_snippet) if self.before_snippet
@@ -83,7 +85,7 @@ module Stepre
       # add options to merged_hash
       options_array.each {|o| merged_hash[o] = params_hash[o] if params_hash.key? o}
 
-      obj.json = {:form_data => Form.write_form_data(merged_hash)}.to_json if obj.valid
+      obj.json = {:form_data => Stepre::Form.write_form_data(merged_hash)}.to_json if obj.valid
 
       return obj
     end
