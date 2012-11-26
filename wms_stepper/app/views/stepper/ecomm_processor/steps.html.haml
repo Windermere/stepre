@@ -1,0 +1,41 @@
+.column.span3
+  .padding.padding-left
+    =# render "processor/processor_nav"
+    nav
+
+.column.span9
+  .padding.padding-right
+    -# flash messages
+    =# render "layouts/flasher" unless @flasher_form
+
+    = simple_form_for(@form.element, :url => "#", :html => {:id => @form.element, :class => "form-horizontal", :novalidate => "novalidate"}) do |f|
+      %input{:type => "hidden", :value => @form_data, :name => "form_data"}
+      = render :partial => @partial, :locals => {:f => f}
+
+      .form-actions
+        .row-fluid
+          .span6
+            - if @step.prev_step_id
+              %button.btn.btn-large.btn-primary{:type => "submit", :id => "prev_button"}
+                %i.icon-arrow-left.icon-white
+                &nbsp;
+                Previous
+
+            = link_to t(:cancel), @form.cancel_url, :class => "cancel-link"
+            
+
+          .span6
+            - if @step.next_step_id
+              %button.btn.btn-large.btn-primary.pull-right{:type => "submit", :id => "next_button"} 
+                Next 
+                &nbsp;
+                %i.icon-arrow-right.icon-white
+            - else
+              %button.btn.btn-large.btn-primary.pull-right{:type => "submit", :id => "next_button"} 
+                Complete
+
+- content_for :beam_down do
+  :coffeescript
+    $ ->
+      Stingre.Helpers.cas_submit({elem: '#{@form.element}', url: '/forms/#{@form.id}/processor_api#{@remote ? "_remote" : nil}', prefix: '#{@form.element}'})
+      Stingre.Helpers.populate_form({elem: '#{@form.element}', prefix: '#{@form.element}'})

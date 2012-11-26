@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  display_name: MyString
+  step_id: 1
+  required: false
+  form_id: 1
+
+two:
+  name: MyString
+  display_name: MyString
+  step_id: 1
+  required: false
+  form_id: 1

@@ -1,0 +1,43 @@
+- base_errors = @processor.errors.messages.delete(:base) || [] 
+- if base_errors.any?
+  #base_errors.alert.alert-error{:data => {:error_messages => @processor.errors.messages.any?.to_s}} 
+    %ul
+      - base_errors.uniq.each do |e|
+        %li= e
+- else
+  = f.error_notification
+
+
+
+-# accumulus iframe + safari bug
+%input{:type => "hidden", :value => params[:safari], :name => "safari"}
+
+%input{:type => "hidden", :value => @tabs.current_step.step, :name => "form_step"}
+%input{:type => "hidden", :value => @processor.form_data, :name => "processor[form_data]"}
+%input{:type => "hidden", :value => current_company.company_companypublickey, :name => "processor[company_companypublickey]"}
+%input{:type => "hidden", :value => params[:offer_id], :name => "processor[offer_offercode]"}
+
+
+
+- content_for :debug_panel do
+  @processor.inspect
+  = @processor.inspect
+
+  %br
+  %br
+
+  @processor.errors.any?
+  = @processor.errors.any?.inspect
+  @processor.errors.inspect
+  = @processor.errors.inspect
+
+  %br
+  %br
+
+  @processor.form_data
+  = @processor.read_form_data.inspect
+
+  %br
+  %br
+  current_company
+  = current_company.inspect

@@ -1,0 +1,95 @@
+.span3.column
+  .padding.padding-left
+    = render "processor/processor_nav"
+
+.span9.column
+  .padding.padding-right
+    -# flash messages
+    =# render "layouts/flasher" unless @flasher_form
+
+    .alert.alert-block
+      %button.close{:type => "button", :"data-dismiss" => "alert"} ×
+      %h3 Existing Account!
+      %ul
+        %li Account for <code>Agent MLS ID "#{@processor.user_mlsagent}"</code> already exists. Sign-in to that account to proceed with offer.
+        %li Contact support for additional help: #{support_link_to_h} 
+
+    = simple_form_for(@processor, :url => @form_url, :html => {:id => "processor", :class => "form-horizontal form-processor"}) do |f|
+      = render "processor/form_defaults", {:f => f}
+      %input{:type => "hidden", :value => true, :name => "_signin"}
+      -# this is for previous_button click detection with ajax cas login
+      %input{:type => "hidden", :value => "false", :name => "_prev"}
+
+      .form-inputs
+        %fieldset
+          %legend Sign In Form
+          %br
+          
+          .row-fluid.processor_inline_signin_fields
+            .span7.well.signin_fields
+              %p.lead Sign-in with existing account:
+              = f.hint "<em class='muted'>(complete these text fields and click next button)</em>"
+              = f.input :user_username, :required => true, :label => "Username", :input_html => {:value => params[:processor].fetch(:user_username, nil)}
+              = f.input :user_userpassword, :required => true, :label => "Password", :input_html => {:value => params[:processor].fetch(:user_userpassword, nil)}
+
+
+            .span1.middle_or
+              %span
+                %em &mdash; or &mdash;
+
+            .span4.well.reset_password
+              %p.lead Click button to reset password:
+              = reset_password_button_h(request.url)
+
+      = render "processor/form_actions", {:f => f}
+
+- content_for :beam_down do
+  :coffeescript
+    $ ->
+      Stingre.Helpers.cas_submit({elem: 'processor', url: '/#{current_company._id}/auth/sessions?redirect=' + location.href, prefix: 'processor'})
+
+- if @hide_error_messages
+  :css
+    .processor_inline_signin_fields .help-inline {
+      display: none;
+    }
+
+:css
+  .alert-blcok h3 {
+    margin-bottom: 5px;
+  }
+  .alert-block code {
+    color: grey; 
+    background-color: #FCF8B3;
+    /* border: 1px solid #FBEED1; */
+    border: 0;
+  }
+
+  .processor_inline_signin_fields .signin_fields .lead {
+    margin-bottom: 10px;
+  }
+  .processor_inline_signin_fields .signin_fields .help-block {
+    margin-left: 75px;
+    margin-bottom: 10px;
+  }
+  .processor_inline_signin_fields .signin_fields {
+    height: 200px;
+  }
+  .processor_inline_signin_fields .middle_or {
+    display: block;
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+    font-weight: strong;
+    font-size: 18px;
+    font-family: "Times New Roman",Georgia,Serif;
+  }
+  .processor_inline_signin_fields .reset_password {
+    height: 200px;
+    text-align: center;
+  }
+  .processor_inline_signin_fields .reset_password .btn {
+    margin-top: 20px;
+  }
+
+

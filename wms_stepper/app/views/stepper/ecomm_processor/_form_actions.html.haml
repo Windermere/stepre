@@ -1,0 +1,61 @@
+:css
+  .form-horizontal .form-actions {
+      padding-left: 20px;
+  }
+
+  #hidden_submit {
+    display: block;
+    width: 0;
+    height: 0;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    left: -10000px;
+  }
+
+.form-actions
+  .row-fluid
+    .span6
+      -# hidden submit button to ensure enter posts to next step (if next step avail)
+      - if @tabs.next_step
+        = f.submit "#", :id => "hidden_submit"
+
+      - if @tabs.prev_step
+        %button.btn.btn-large.btn-primary{:type => "submit", :name => "previous_button", :id => "previous_button"}
+          %i.icon-arrow-left.icon-white
+          &nbsp;
+          Previous
+
+      = link_to t(:cancel), show_processor_path_h(params[:offer_id]), :class => "cancel-link"
+      
+
+    .span6
+      - if @tabs.next_step
+        %button.btn.btn-large.btn-primary.pull-right{:type => "submit", :id => "next_button"} 
+          Next 
+          &nbsp;
+          %i.icon-arrow-right.icon-white
+
+
+-#- content_for :beam_down do
+-#  :javascript
+-#    $(document).ready(function() {
+-#      var form = $('form#new_processor');
+-#      form.submit(function(event) {
+-#        event.preventDefault();
+-#        return false;
+-#      });
+-#    
+-#      $("button#previous_button").on("click", function(){
+-#        var form = 
+-#        console.log($("form#new_processor").attr("action"));
+-#        form.submit();
+-#      });
+-#
+-#      $("button#next_button").on("click", function(){
+-#        console.log($("form#new_processor").attr("action"));
+-#        form.submit();
+-#      });
+-#
+-#    });

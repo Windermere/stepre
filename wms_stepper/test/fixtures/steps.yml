@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  form_id: 1
+  name: MyString
+  template_name: MyString
+  previous_step: false
+  next_step: false
+  previous_step_id: 1
+  next_step_id: 1
+
+two:
+  form_id: 1
+  name: MyString
+  template_name: MyString
+  previous_step: false
+  next_step: false
+  previous_step_id: 1
+  next_step_id: 1
