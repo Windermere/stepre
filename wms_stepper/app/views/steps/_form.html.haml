@@ -1,0 +1,44 @@
+= form_for [@form, @step], :html => { :class => 'form-horizontal' } do |f|
+  .control-group
+    = f.label :prev_step_id, :class => 'control-label'
+    .controls
+      = f.number_field :prev_step_id, :class => 'number_field'
+
+  .control-group
+    = f.label :next_step_id, :class => 'control-label'
+    .controls
+      = f.number_field :next_step_id, :class => 'number_field'
+
+  .control-group
+    = f.label :position, :class => 'control-label'
+    .controls
+      = f.number_field :position, :class => 'number_field'
+
+  .control-group
+    = f.label :form_id, :class => 'control-label'
+    .controls
+      = f.number_field :form_id, :class => 'number_field'
+
+  .control-group
+    = f.label :name, :class => 'control-label'
+    .controls
+      = f.text_field :name, :class => 'text_field'
+
+  .control-group
+    = f.label :template, :class => 'control-label'
+    .controls
+      = f.text_field :template, :class => 'text_field'
+
+  .control-group
+    = f.label :before_snippet, :class => 'control-label'
+    .controls
+      = f.text_area :before_snippet, :class => 'text_area', :style => "font-family: monospace; width:80%;"
+
+  .control-group
+    = f.label :after_snippet, :class => 'control-label'
+    .controls
+      = f.text_area :after_snippet, :class => 'text_area', :style => "font-family: monospace; width:80%;"
+
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), form_steps_path, :class => 'btn'

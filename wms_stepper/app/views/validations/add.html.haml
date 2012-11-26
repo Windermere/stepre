@@ -1,0 +1,22 @@
+- model_class = Validation
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize
+%table.table.table-striped
+  %thead
+    %tr
+      %th= model_class.human_attribute_name(:id)
+      %th= model_class.human_attribute_name(:name)
+      %th= model_class.human_attribute_name(:desc)
+      %th= model_class.human_attribute_name(:created_at)
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @validations.each do |validation|
+      %tr
+        %td= link_to validation.id, attr_validation_path(@attr, validation)
+        %td= validation.name
+        %td= validation.desc
+        %td=l validation.created_at
+        %td
+          = link_to t('.add', :default => t("helpers.links.add")), add_create_attr_validation_path(@attr, validation), :method => :post, :class => 'btn btn-mini btn-danger'
+
+= link_to t('.back', :default => t("helpers.links.back")), attr_validations_path(@attr), :class => 'btn btn-primary'

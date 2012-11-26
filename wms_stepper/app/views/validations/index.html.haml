@@ -1,0 +1,25 @@
+- model_class = Validation
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize
+%table.table.table-striped
+  %thead
+    %tr
+      %th= model_class.human_attribute_name(:id)
+      %th= model_class.human_attribute_name(:name)
+      %th= model_class.human_attribute_name(:desc)
+      %th= model_class.human_attribute_name(:created_at)
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @validations.each do |validation|
+      %tr
+        %td= link_to validation.id, attr_validation_path(@attr, validation)
+        %td= validation.name
+        %td= validation.desc
+        %td=l validation.created_at
+        %td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_attr_validation_path(@attr, validation), :class => 'btn btn-mini'
+          = link_to t('.remove', :default => t("helpers.links.remove")), add_destroy_attr_validation_path(@attr, validation), :method => :delete, :class => 'btn btn-mini btn-danger'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), attr_validation_path(@attr, validation), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+
+= link_to t('.new', :default => t("helpers.links.new")), new_attr_validation_path(@attr), :class => 'btn btn-primary'
+= link_to t('.add', :default => t("helpers.links.add")), add_attr_validations_path(@attr), :class => 'btn btn-primary'

@@ -1,0 +1,54 @@
+- current_company = OpenStruct.new(:mls_select_array => [[1,1],[2,2],[3,3]])
+:css
+  .popover-title {padding: 3px 10px 5px;}
+   
+.form-inputs
+  %fieldset
+    %legend MLS Info
+    %br
+    .row-fluid
+      .span6
+        = f.input :user_mlsid, :collection => current_company.mls_select_array, :prompt => "Select your MLS", :hint => "#{"&nbsp;" * 3}<em>First, select your MLS.</em>", :label => "MLS ID", :input_html => {:class => css_class ||= nil}
+        = f.input :user_mlsagent, :disabled => true, :hint => "#{"&nbsp;" * 3}<em>Second, enter your Agent MLS ID number.</em>", :label => "Agent MLS ID", :input_html => {:class => css_class ||= nil}
+      .span6
+        = link_to t(:what_if_my_mls_isnt_listed), "#", :id => "what_if", :"data-content" => current_company.mls_not_listed , :"data-original-title" => "<span class='close' onclick='close_pop();'>&times;</span><div style='clear:both'></div>".html_safe
+
+- content_for :beam_down do
+  :javascript
+    var close_pop;
+    $(document).ready(function(){
+      elem_1 = $("[id$=_user_mlsagent]");
+      elem_2 = $("[id$=_user_mlsid]");
+      
+      toggle_agent_mls_id = function(elem) {
+        if (elem.val() === "") {
+          elem_1.val("").attr('disabled', 'disabled');
+        } else {
+          elem_1.removeAttr('disabled').focus();
+        }
+      };
+
+      // event
+      elem_2.on("change", function(){
+        toggle_agent_mls_id($(this));
+      });
+
+      // init
+      toggle_agent_mls_id(elem_2);
+
+      $('#what_if').popover({placement: "bottom", trigger: "manual", html: true}).click(function(e) { 
+        e.preventDefault(); 
+        $(this).focus(); 
+      });
+      $('#what_if').on("click", function() {
+        if (!$(".popover").length) {
+          $(this).popover("show");
+        }
+      });
+      close_pop = function() {
+        $("#what_if").popover("hide");
+      }
+  
+
+    });
+  
