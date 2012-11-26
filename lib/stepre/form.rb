@@ -61,12 +61,14 @@ module Stepre
       self.instance_eval(self.before_snippet) if self.before_snippet
 
       # run all validations on current step attrs
-      step.custom_validate(merged_hash) unless prev_button or !step
+      step.custom_validate(merged_hash) unless prev_button or merged_hash["skip_validations"]
 
       # create form object--vehicle for processed form data
       obj = OpenStruct.new(:valid => true)
 
-      case 
+      case
+      when merged_hash.delete("skip_validations")
+        # do nothing
       when prev_button && !step.is_first_step?
         merged_hash["step_id"] = step.prev_step_id
       when step.errors.any?
