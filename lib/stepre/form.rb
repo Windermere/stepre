@@ -41,13 +41,11 @@ module Stepre
     def process_form_data(params_hash, options_array=[])
       # create hash from submitted form data
       new_hash = Stepre::Form.read_form_data(params_hash["form_data"])
-      new_hash = Stepre::Form.format_hash(self.element, new_hash)
-      puts "new_hash => #{new_hash.inspect}"
+      old_hash = Stepre::Form.read_form_data(new_hash.delete("form_data"))
 
       # create hash from current step 
-      old_hash = Stepre::Form.read_form_data(new_hash.delete("form_data"))
+      new_hash = Stepre::Form.format_hash(self.element, new_hash)
       old_hash = Stepre::Form.format_hash(self.element, old_hash)
-      puts "old_hash => #{old_hash.inspect}"
 
       # previous button pressed?
       prev_button = !!new_hash.delete("prev_button")

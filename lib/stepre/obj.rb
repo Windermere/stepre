@@ -48,11 +48,8 @@ module Stepre
 
     # this goes in Stepre::Step
     def custom_validate(hash)
+      pundit = Stepre::Pundit.new(hash.slice(*(self.attrs.map {|o| o.name})))
       self.attrs.each do |attr|
-        #val = hash.fetch(attr.name, nil)
-        ## do not allow empty strings by default and allow through validation args
-        #val = nil if !val.nil? and val.to_s.strip.empty?
-        pundit = Stepre::Pundit.new(attr.name => hash.fetch(attr.name, nil))
         (attr.validations || []).each do |vld|
           pundit.instance_eval(vld.snippet.gsub("ATTR", attr.name))
         end
