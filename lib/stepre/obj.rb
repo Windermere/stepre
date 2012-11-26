@@ -54,10 +54,9 @@ module Stepre
           pundit.instance_eval(vld.snippet.gsub("ATTR", attr.name))
         end
 
-        (pundit.errors.delete(:base) || []).each {|o| self.errors[:base] << o}
-        self.errors.add(attr.name, pundit.errors[attr.name]) if pundit.errors.any?
+        self.errors.add(attr.name, pundit.errors[attr.name]) unless pundit.errors[attr.name].empty?
       end
-
+      (pundit.errors.delete(:base) || []).each {|o| self.errors[:base] << o}
       return nil
     end
   end
