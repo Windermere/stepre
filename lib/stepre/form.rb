@@ -58,7 +58,8 @@ module Stepre
       merged_hash = Stepre::Form.merge_hash(old_hash, new_hash, prev_button, step_attrs_array)
 
       # logic in eval can be moved to appropriate location later
-      self.instance_eval(self.before_snippet) if self.before_snippet
+      #self.instance_eval("raise self.inspect")
+      self.instance_eval(step.before_snippet) if step.before_snippet
 
       # run all validations on current step attrs
       step.custom_validate(merged_hash) unless prev_button or merged_hash["skip_validations"]
@@ -81,7 +82,7 @@ module Stepre
       end
 
       # logic in eval can be moved to appropriate location later
-      self.instance_eval(self.after_snippet) if self.after_snippet
+      self.instance_eval(step.after_snippet) if step.after_snippet
 
       # add options to merged_hash
       options_array.each {|o| merged_hash[o] = params_hash[o] if params_hash.key? o}

@@ -4,6 +4,10 @@ class Form < ActiveRecord::Base
 
   validates :element, :presence => true
 
+  def write_hash_to_db(hash)
+    
+  end
+
   def to_config_hash
     self.last_step
     self.first_step

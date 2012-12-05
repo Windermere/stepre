@@ -2,16 +2,16 @@
 2:
   id: 2
   name: WEB_CMA
-  cancel_url: /forms/WEB_CMA/processor
+  cancel_url: /offers/WEB_CMA/processor
   element: processor
   redirect_to: ''
   steps_count: 6
-  attrs_count: 14
+  attrs_count: 16
   nav: false
   first_step_id: 5
   last_step_id: 11
   created_at: 2012-11-21 21:21:21.003641000 Z
-  updated_at: 2012-11-26 16:43:18.988559000 Z
+  updated_at: 2012-12-04 23:28:01.232940000 Z
   steps:
     5:
       id: 5
@@ -42,15 +42,16 @@
       nav_step: 
       nav_step_name: 
       signin_required: false
-      before_snippet: ! "# redirect if logged in\r\nif merged_hash.session\r\n  agent
-        = MlsAgent.new(merged_hash.slice(*MlsAgent.fake_api_keys))\r\n  agent.valid?\r\n
-        \ user_hash = agent.attributes.slice(*User.api_keys).unprepend_keys(\"user_\")\r\n
+      before_snippet: ! "raise \"hello\"\r\n# redirect if logged in\r\nif merged_hash[\"session\"]\r\n
+        \ puts \"yesssss\"\r\n  agent = MlsAgent.new(merged_hash.slice(*MlsAgent.fake_api_keys))\r\n
+        \ agent.valid?\r\n  user_hash = agent.attributes.slice(*User.api_keys).unprepend_keys(\"user_\")\r\n\r\n
         \ case\r\n  # send to dashboard to complete offer\r\n  when WMS::DAL::Admin::UserApi.has_accumulus_account?(user_hash)\r\n
-        \ merged_hash[\"redirect_to\"] = \"/#{hash['company_companypublickey']}/dashboard/offers/#{merged_hash['offer_offercode']}\"\r\n
-        \ merged_hash[\"skip_validations\"] = true\r\n  # send to accumulus iframe\r\n
-        \ when !user_hash[\"userid\"].to_s.strip.empty? then \r\n  merged_hash[\"step_id\"]
-        = 11\r\n  merged_hash[\"skip_validations\"] = true\r\n  end\r\nend\r\nputs
-        \"HELLO HELLO HELLO\""
+        \   merged_hash[\"redirect_to\"] = \"/#{hash['company_companypublickey']}/dashboard/offers/#{merged_hash['offer_offercode']}\"\r\n
+        \   merged_hash[\"skip_validations\"] = true\r\n\r\n  # send to confirm accumulus
+        details\r\n  when !user_hash[\"userid\"].to_s.strip.empty? \r\n    puts \"yesssss\"\r\n
+        \   merged_hash[\"step_id\"] = 9\r\n    obj = OpenStruct.new(:valid => true)\r\n
+        \   obj.json = {:form_data => Stepre::Form.write_form_data(merged_hash)}.to_json\r\n
+        \   return obj\r\n  end\r\nend"
       after_snippet: ! "if obj.valid\r\n  agent = MlsAgent.new(merged_hash.slice(*MlsAgent.fake_api_keys))\r\n
         \ if agent.valid?\r\n    user_hash = agent.attributes.slice(*User.api_keys).unprepend_keys(\"user_\")\r\n
         \   case\r\n    # user has accumulus account && user account (no way for user
@@ -58,12 +59,12 @@
         && WMS::DAL::Admin::UserApi.has_accumulus_account?(user_hash)\r\n    # redirect
         to signin step\r\n    merged_hash[\"step_id\"] = 7\r\n    # user does not
         have accumulus account && has valid user account\r\n    # HACK: validate by
-        inspecting userid in hash; should be an API call\r\n    when !merged_hash[\"session]
+        inspecting userid in hash; should be an API call\r\n    when !merged_hash[\"session\"]
         && !user_hash[\"userid\"].to_s.strip.empty?\r\n    # redirect to signin step\r\n
-        \   merged_hash[\"step_id\"] = 7\r\n    end\r\n  else\r\n   obj.json = agent.errors.to_json
-        && obj.valid = false\r\n  end\r\nend \r\nputs \"GOODBYE GOODBYE GOODBYE\""
+        \   merged_hash[\"step_id\"] = 7\r\n    end\r\n  else\r\n   obj.json = agent.errors.to_json\r\n
+        \  obj.valid = false\r\n  end\r\nend"
       created_at: 2012-11-21 21:43:51.732797000 Z
-      updated_at: 2012-11-26 20:50:02.511937000 Z
+      updated_at: 2012-12-05 01:59:40.354657000 Z
       attrs:
         8:
           id: 8
@@ -105,26 +106,79 @@
       id: 7
       form_id: 2
       name: signin
-      template: processor/steps/signin
+      template: processor/steps_custom/signin
       prev_step_id: 6
-      next_step_id: 
+      next_step_id: 9
       position: 2
-      attrs_count: 
+      attrs_count: 2
       nav_step: 
       nav_step_name: 
       signin_required: false
       before_snippet: ''
-      after_snippet: ''
+      after_snippet: ! "if obj.valid\r\n  auth_hash = {}\r\n  # delete sensitive keys
+        from \r\n  [\"user_userpassword\"].each {|k| auth_hash[k] = merged_hash.delete(k)}\r\n
+        \ auth_hash[\"user_username\"] = merged_hash[\"user_username\"]\r\n  auth_session
+        = Auth::Session.new(auth_hash)\r\n  auth_session.validate_via_api\r\n  if
+        !auth_session.errors.any?\r\n    # data to pass to cas nonajax_submit for
+        post\r\n    auth_array = [ \r\n      {name: 'username', value: auth_session.user_username},\r\n
+        \     {name: 'password', value: auth_session.user_userpassword},\r\n      {name:
+        'lt', value: Auth::Session.cas_ticket},\r\n    ]\r\n    # overwrite existing
+        json\r\n    obj.json = {:cas => true, :form_data => auth_array}.to_json\r\n\r\n
+        \   service_hash = {:host => \"localhost:3000\", :only_path => false, :method
+        => \"post\", :form_data => Stepre::Form.write_form_data(merged_hash)}\r\n
+        \   local_redirect_hash = {:host => \"localhost:3000\", :only_path => true,
+        :company_uuid => merged_hash[\"company_companypublickey\"], :id => merged_hash[\"offer_offercode\"]}\r\n
+        \   service_hash[:redirect] = Rails.application.routes.url_helpers.processor_offer_url(local_redirect_hash)\r\n
+        \   service_url = Rails.application.routes.url_helpers.welcome_url(service_hash)\r\n
+        \   obj.location = Auth::Session::LOGIN_URL + Auth::Session::redir_params(service_url)\r\n
+        \   return obj\r\n  else\r\n    obj.valid = false\r\n    obj.json = auth_session.errors.to_json\r\n
+        \   return obj\r\n  end\r\nend"
       created_at: 2012-11-26 16:31:16.004135000 Z
-      updated_at: 2012-11-26 16:33:32.853026000 Z
-      attrs: {}
+      updated_at: 2012-12-05 00:53:20.871088000 Z
+      attrs:
+        22:
+          id: 22
+          name: user_username
+          display_name: Username
+          step_id: 7
+          reck: 'false'
+          form_id: 2
+          element: input
+          created_at: 2012-12-03 23:04:44.734609000 Z
+          updated_at: 2012-12-03 23:04:44.734609000 Z
+          validations:
+            6:
+              id: 6
+              name: validates_presence_of
+              desc: ''
+              snippet: validates_presence_of :ATTR
+              created_at: 2012-11-21 22:48:25.136653000 Z
+              updated_at: 2012-11-21 22:48:25.136653000 Z
+        23:
+          id: 23
+          name: user_userpassword
+          display_name: Password
+          step_id: 7
+          reck: 'false'
+          form_id: 2
+          element: input
+          created_at: 2012-12-04 00:51:26.409160000 Z
+          updated_at: 2012-12-04 00:51:37.694583000 Z
+          validations:
+            5:
+              id: 5
+              name: validates_presence_of
+              desc: ''
+              snippet: validates_presence_of :ATTR
+              created_at: 2012-11-21 20:57:02.713302000 Z
+              updated_at: 2012-11-21 21:00:29.586165000 Z
     8:
       id: 8
       form_id: 2
       name: register
       template: processor/steps/register
       prev_step_id: 6
-      next_step_id: 
+      next_step_id: 11
       position: 3
       attrs_count: 12
       nav_step: 
@@ -133,7 +187,7 @@
       before_snippet: ''
       after_snippet: ''
       created_at: 2012-11-26 16:32:49.609434000 Z
-      updated_at: 2012-11-26 17:58:29.417558000 Z
+      updated_at: 2012-12-05 01:06:48.651430000 Z
       attrs:
         10:
           id: 10
@@ -365,8 +419,8 @@
       form_id: 2
       name: confirm
       template: processor/steps/confirm
-      prev_step_id: 6
-      next_step_id: 
+      prev_step_id: 5
+      next_step_id: 11
       position: 4
       attrs_count: 
       nav_step: 
@@ -375,7 +429,7 @@
       before_snippet: ''
       after_snippet: ''
       created_at: 2012-11-26 16:36:22.805629000 Z
-      updated_at: 2012-11-26 17:58:18.746412000 Z
+      updated_at: 2012-12-05 01:06:57.276645000 Z
       attrs: {}
     11:
       id: 11
