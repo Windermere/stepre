@@ -20,7 +20,7 @@
       template: processor/steps/start
       prev_step_id: 
       next_step_id: 6
-      position: 2
+      position: 1
       attrs_count: 
       nav_step: 
       nav_step_name: 
@@ -39,16 +39,16 @@
         \ end\r\nend"
       after_snippet: ''
       created_at: 2012-11-21 21:39:28.885190000 Z
-      updated_at: 2012-12-05 05:09:55.464418000 Z
+      updated_at: 2012-12-06 03:38:21.633200000 Z
       attrs: {}
     6:
       id: 6
       form_id: 2
       name: mls
-      template: processor/steps/mls
+      template: processor/steps_custom/mls
       prev_step_id: 5
       next_step_id: 8
-      position: 1
+      position: 2
       attrs_count: 2
       nav_step: 
       nav_step_name: 
@@ -69,7 +69,7 @@
         + [\"user_uuid\", \"user_userid\"]))\r\n      end\r\n    end\r\n  else\r\n
         \  obj.json = agent.errors.to_json\r\n   obj.valid = false\r\n  end\r\nend"
       created_at: 2012-11-21 21:43:51.732797000 Z
-      updated_at: 2012-12-05 05:46:16.540787000 Z
+      updated_at: 2012-12-06 03:39:42.886225000 Z
       attrs:
         8:
           id: 8
@@ -114,7 +114,7 @@
       template: processor/steps_custom/signin
       prev_step_id: 6
       next_step_id: 9
-      position: 2
+      position: 3
       attrs_count: 2
       nav_step: 
       nav_step_name: 
@@ -144,7 +144,7 @@
         \   return obj\r\n  else\r\n    obj.valid = false\r\n    obj.json = auth_session.errors.to_json\r\n
         \   return obj\r\n  end\r\nend"
       created_at: 2012-11-26 16:31:16.004135000 Z
-      updated_at: 2012-12-05 05:11:04.146228000 Z
+      updated_at: 2012-12-06 03:40:01.878864000 Z
       attrs:
         22:
           id: 22
@@ -450,7 +450,7 @@
       template: processor/steps/confirm
       prev_step_id: 5
       next_step_id: 11
-      position: 4
+      position: 3
       attrs_count: 
       nav_step: 
       nav_step_name: 
@@ -470,7 +470,7 @@
         \ else\r\n    obj.valid = false\r\n    obj.json = current_user.errors.to_json\r\n
         \ end\r\n  return obj\r\nend\r\n"
       created_at: 2012-11-26 16:36:22.805629000 Z
-      updated_at: 2012-12-05 05:12:46.399590000 Z
+      updated_at: 2012-12-06 03:40:18.592108000 Z
       attrs: {}
     11:
       id: 11
@@ -479,7 +479,7 @@
       template: processor/steps_custom/accumulus_iframe
       prev_step_id: 
       next_step_id: 
-      position: 6
+      position: 4
       attrs_count: 
       nav_step: 
       nav_step_name: 
@@ -487,5 +487,5 @@
       before_snippet: ''
       after_snippet: ''
       created_at: 2012-11-26 16:42:47.689970000 Z
-      updated_at: 2012-12-05 05:15:19.413306000 Z
+      updated_at: 2012-12-06 03:40:31.299769000 Z
       attrs: {}

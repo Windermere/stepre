@@ -50,14 +50,17 @@ module Stepre
       new_hash = Stepre::Form.format_hash(self.element, new_hash)
       old_hash = Stepre::Form.format_hash(self.element, old_hash)
 
-      # previous button pressed?
-      if prev_button = !!new_hash.delete("prev_button")
-        obj.json = {:form_data => Stepre::Form.write_form_data(old_hash)}.to_json
-      end 
-
       # find current step
       raise "STEP NOT FOUND" unless step = self.steps.find(old_hash["step_id"])
-      #step_attrs_array = step.attrs.map {|o| o.name}
+
+      # previous button pressed?
+      if prev_button = !!new_hash.delete("prev_button")
+        # remove future step attrs
+        step.attrs.each {|o| old_hash.delete(o.name)}
+        old_hash["step_id"] = step.prev_step_id
+        obj.json = {:form_data => Stepre::Form.write_form_data(old_hash)}.to_json
+        return obj
+      end 
 
       # merge in submitted form data 
       #merged_hash = Stepre::Form.merge_hash(old_hash, new_hash, prev_button, step_attrs_array)
@@ -73,8 +76,8 @@ module Stepre
       case
       when merged_hash.delete("skip_validations")
         # do nothing
-      when prev_button && !step.is_first_step?
-        merged_hash["step_id"] = step.prev_step_id
+      #when prev_button && !step.is_first_step?
+      #  merged_hash["step_id"] = step.prev_step_id
       when step.errors.any?
         obj.json = step.errors.to_json
         obj.valid = false
