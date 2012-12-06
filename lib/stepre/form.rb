@@ -39,6 +39,9 @@ module Stepre
     end
 
     def process_form_data(params_hash, options_array=[])
+      # create form object--vehicle for processed form data
+      obj = OpenStruct.new(:valid => true)
+
       # create hash from submitted form data
       new_hash = Stepre::Form.read_form_data(params_hash["form_data"])
       old_hash = Stepre::Form.read_form_data(new_hash.delete("form_data"))
@@ -48,14 +51,17 @@ module Stepre
       old_hash = Stepre::Form.format_hash(self.element, old_hash)
 
       # previous button pressed?
-      prev_button = !!new_hash.delete("prev_button")
+      if prev_button = !!new_hash.delete("prev_button")
+        obj.json = {:form_data => Stepre::Form.write_form_data(old_hash)}.to_json
+      end 
 
       # find current step
       raise "STEP NOT FOUND" unless step = self.steps.find(old_hash["step_id"])
-      step_attrs_array = step.attrs.map {|o| o.name}
+      #step_attrs_array = step.attrs.map {|o| o.name}
 
       # merge in submitted form data 
-      merged_hash = Stepre::Form.merge_hash(old_hash, new_hash, prev_button, step_attrs_array)
+      #merged_hash = Stepre::Form.merge_hash(old_hash, new_hash, prev_button, step_attrs_array)
+      merged_hash = old_hash.merge new_hash
 
       # logic in eval can be moved to appropriate location later
       #self.instance_eval("raise self.inspect")
@@ -63,9 +69,6 @@ module Stepre
 
       # run all validations on current step attrs
       step.custom_validate(merged_hash) unless prev_button or merged_hash["skip_validations"]
-
-      # create form object--vehicle for processed form data
-      obj = OpenStruct.new(:valid => true)
 
       case
       when merged_hash.delete("skip_validations")
