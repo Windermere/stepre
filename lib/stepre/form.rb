@@ -1,3 +1,5 @@
+require "stepre/form/snippets"
+
 module Stepre
   class Form
     attr_accessor :config_hash, :obj
@@ -70,6 +72,12 @@ module Stepre
       #self.instance_eval("raise self.inspect")
       self.instance_eval(step.before_snippet) if step.before_snippet
 
+      before_method = "#{self.name}_#{step.name}_before"
+      if Stepre::Form::Snippets.respond_to? before_method
+        Stepre::Form::Snippets.send(before_method, obj)
+        return obj if obj.return
+      end
+
       # run all validations on current step attrs
       step.custom_validate(merged_hash) unless prev_button or merged_hash["skip_validations"]
 
@@ -89,6 +97,12 @@ module Stepre
 
       # logic in eval can be moved to appropriate location later
       self.instance_eval(step.after_snippet) if step.after_snippet
+
+      after_method = "#{self.name}_#{step.name}_after"
+      if Stepre::Form::Snippets.respond_to? after_method
+        Stepre::Form::Snippets.send(after_method, obj)
+        return obj if obj.return
+      end
 
       # add options to merged_hash
       options_array.each {|o| merged_hash[o] = params_hash[o] if params_hash.key? o}
