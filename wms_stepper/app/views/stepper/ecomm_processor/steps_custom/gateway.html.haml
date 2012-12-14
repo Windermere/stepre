@@ -1,0 +1,90 @@
+:css
+  iframe#gateway {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    width: 100%;
+    min-height: 500px;
+    height: 100%;
+  }
+
+  .iframe_loading {
+    background: transparent url("/assets/spinner.gif") no-repeat center center;
+  }
+  
+  
+  #right_panel {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    position: absolute;  
+    top: 40;
+    bottom: 40;
+    right: 0;
+  }
+
+  #left_panel {
+    padding: 20px 0 0 0;
+  }
+
+.span3.column#left_panel
+  = render "processor/processor_nav"
+
+.span9.column#right_panel
+  -# ACCUMULUS SAFARI 3RD-PARTY IFRAME BUG 
+  -#  - if UserAgent.parse(request.env['HTTP_USER_AGENT']).browser == "Safari"
+  -#    .padding
+  -#      .alert
+  -#        %h2 Complete Transaction
+  -#        %p.lead{:style => "margin-left: 5px; font-size: 16px;"} Safari browser detected is older than Safari 6
+  -#        %strong
+  -#          = link_to "Complete transaction in secure window <i class='icon-arrow-right'></i>".html_safe, @processor.offer_iframe_url, :class => "btn btn-warning btn-large", :style => "color: #333333;"
+  -#        %br
+  -#  - else
+  -#    %iframe#gateway.iframe_loading{:src => @processor.offer_iframe_url} Your browser does not support inline frames.
+  -#    -# testing iframe
+  -#    -# %iframe#gateway{:src => "/accumulus_iframe/WEB_CMA.html"} Your browser does not support inline frames.
+
+  %iframe#gateway.iframe_loading{:src => @processor.offer_iframe_url} Your browser does not support inline frames.
+  -# testing iframe
+  -# %iframe#gateway{:src => "/accumulus_iframe/WEB_CMA.html"} Your browser does not support inline frames.
+
+- content_for :beam_down do
+  :javascript
+
+    $(function(){
+      $("#gateway").load(function (){
+        $(this).removeClass("iframe_loading"); 
+      });
+    });
+
+-# - content_for :beam_down do
+-#   :javascript
+-#     $(window).load(function() {
+-#       iframe = $("#gateway"); 
+-#       iframe_container = $("#iframe_container");
+-#       right_panel = $("#right_panel");
+-#       left_panel = $("#left_panel");
+-#       footer = $(".footer");
+-# 
+-#       function resize_i() {
+-#         rph = $(window).height() - right_panel.offset().top - footer.height();
+-#         //right_panel.height(rph);
+-#         //iframe.height(rph);
+-# 
+-#         lpo = left_panel.offset().left;
+-#         lpw = left_panel.width();
+-#         ww = $(window).width();
+-#         left_panel.width(lpw);
+-#         right_panel.width(ww - (lpo + lpw));
+-#       };
+-# 
+-#       $(window).resize(function(){
+-#         //form (iframe's parent) to bottom of page in px 
+-#         //window height - form offset from top => set to form height
+-#         console.log("window changed");
+-#         resize_i();
+-#       });
+-# 
+-#       resize_i();
+-#     });

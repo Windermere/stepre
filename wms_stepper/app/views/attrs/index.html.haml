@@ -1,0 +1,27 @@
+- model_class = Attr
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize
+%table.table.table-striped
+  %thead
+    %tr
+      %th= model_class.human_attribute_name(:id)
+      %th= model_class.human_attribute_name(:name)
+      %th= model_class.human_attribute_name(:display_name)
+      %th= model_class.human_attribute_name(:step_id)
+      %th= model_class.human_attribute_name(:form_id)
+      %th= model_class.human_attribute_name(:created_at)
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @attrs.each do |attr|
+      %tr
+        %td= link_to attr.id, step_attr_path(@step, attr)
+        %td= attr.name
+        %td= attr.display_name
+        %td= attr.step_id
+        %td= attr.form_id
+        %td=l attr.created_at
+        %td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_step_attr_path(@step, attr), :class => 'btn btn-mini'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), step_attr_path(@step, attr), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+
+= link_to t('.new', :default => t("helpers.links.new")), new_step_attr_path(@step), :class => 'btn btn-primary'

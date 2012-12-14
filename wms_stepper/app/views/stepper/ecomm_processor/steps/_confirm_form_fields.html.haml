@@ -1,0 +1,19 @@
+:css 
+  .help-block.my_account_desc {
+    margin-left: 75px;
+    margin-bottom: 10px;
+    color: #C09853;
+  }
+
+= f.hint "<em>Confirm billing data below</em>", :class => "my_account_desc"
+
+- User::REQ_KEYS.each do |k|
+  - case k
+  - when /homestate/
+    = f.input k.to_sym, :required => true, :collection => User::STATES, :label => User::KEY_DESC[k], :input_html => {:selected => params[model_name].fetch(k, nil)}
+
+  - when /password|email|username/i 
+    = f.input k.to_sym, :as => :hidden
+  - else
+    = f.input k.to_sym, :required => true, :label => User::KEY_DESC[k]
+

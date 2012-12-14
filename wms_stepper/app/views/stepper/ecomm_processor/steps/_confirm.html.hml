@@ -1,0 +1,18 @@
+.form-inputs
+  %fieldset
+    %legend= "Subscription #{t(:seat).camelize.pluralize}"
+    = f.input :offer_seats, :required => true, :hint => "Enter number of #{t(:seat).pluralize}", :label => "Subscription #{t(:seat).camelize.pluralize}", :input_html => {:class => "number_of_units", :value => @processor.offer_seats || 1}
+    
+
+  %fieldset
+    %legend My Account Details
+    %br
+    = render "processor/steps/confirm_form_fields", {:f => f, :model_name => :processor, :actual_model => @processor}
+      
+-# # unused--this was to split off from step 1
+-#  - if @processor.register_for == "3"
+-#    %fieldset
+-#      %legend Subscription Account Details (for someone else)
+
+- content_for :beam_down do
+  = javascript_include_tag "/javascripts/number_of_units_mask.js"
