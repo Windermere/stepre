@@ -1,396 +1,63 @@
 ---
-2:
-  id: 2
-  name: WEB_CMA
-  cancel_url: /forms/WEB_CMA/processor
-  element: processor
+6:
+  id: 6
+  name: activate_to_confirm
+  cancel_url: ''
+  element: stepre
   redirect_to: ''
-  steps_count: 6
-  attrs_count: 14
+  steps_count: 1
+  attrs_count: 1
   nav: false
-  first_step_id: 5
-  last_step_id: 11
-  created_at: 2012-11-21 21:21:21.003641000 Z
-  updated_at: 2012-11-26 16:43:18.988559000 Z
+  first_step_id: 15
+  last_step_id: 15
+  created_at: 2012-12-12 21:25:59.555053000 Z
+  updated_at: 2012-12-12 21:35:56.233462000 Z
   steps:
-    5:
-      id: 5
-      form_id: 2
-      name: start
-      template: processor/steps/start
-      prev_step_id: 
-      next_step_id: 6
-      position: 2
-      attrs_count: 
-      nav_step: 
-      nav_step_name: 
-      signin_required: false
-      before_snippet: ''
-      after_snippet: ''
-      created_at: 2012-11-21 21:39:28.885190000 Z
-      updated_at: 2012-11-26 14:17:01.080645000 Z
-      attrs: {}
-    6:
-      id: 6
-      form_id: 2
-      name: mls
-      template: processor/steps/mls
-      prev_step_id: 5
-      next_step_id: 8
-      position: 1
-      attrs_count: 2
-      nav_step: 
-      nav_step_name: 
-      signin_required: false
-      before_snippet: ! "# redirect if logged in\r\nif merged_hash.session\r\n  agent
-        = MlsAgent.new(merged_hash.slice(*MlsAgent.fake_api_keys))\r\n  agent.valid?\r\n
-        \ user_hash = agent.attributes.slice(*User.api_keys).unprepend_keys(\"user_\")\r\n
-        \ case\r\n  # send to dashboard to complete offer\r\n  when WMS::DAL::Admin::UserApi.has_accumulus_account?(user_hash)\r\n
-        \ merged_hash[\"redirect_to\"] = \"/#{hash['company_companypublickey']}/dashboard/offers/#{merged_hash['offer_offercode']}\"\r\n
-        \ merged_hash[\"skip_validations\"] = true\r\n  # send to accumulus iframe\r\n
-        \ when !user_hash[\"userid\"].to_s.strip.empty? then \r\n  merged_hash[\"step_id\"]
-        = 11\r\n  merged_hash[\"skip_validations\"] = true\r\n  end\r\nend\r\nputs
-        \"HELLO HELLO HELLO\""
-      after_snippet: ! "if obj.valid\r\n  agent = MlsAgent.new(merged_hash.slice(*MlsAgent.fake_api_keys))\r\n
-        \ if agent.valid?\r\n    user_hash = agent.attributes.slice(*User.api_keys).unprepend_keys(\"user_\")\r\n
-        \   case\r\n    # user has accumulus account && user account (no way for user
-        to have accumulus account without user account)\r\n    when !merged_hash[\"session\"]
-        && WMS::DAL::Admin::UserApi.has_accumulus_account?(user_hash)\r\n    # redirect
-        to signin step\r\n    merged_hash[\"step_id\"] = 7\r\n    # user does not
-        have accumulus account && has valid user account\r\n    # HACK: validate by
-        inspecting userid in hash; should be an API call\r\n    when !merged_hash[\"session]
-        && !user_hash[\"userid\"].to_s.strip.empty?\r\n    # redirect to signin step\r\n
-        \   merged_hash[\"step_id\"] = 7\r\n    end\r\n  else\r\n   obj.json = agent.errors.to_json
-        && obj.valid = false\r\n  end\r\nend \r\nputs \"GOODBYE GOODBYE GOODBYE\""
-      created_at: 2012-11-21 21:43:51.732797000 Z
-      updated_at: 2012-11-26 20:50:02.511937000 Z
-      attrs:
-        8:
-          id: 8
-          name: user_mlsagent
-          display_name: MLS Agent
-          step_id: 6
-          reck: 'false'
-          form_id: 2
-          element: input
-          created_at: 2012-11-21 22:48:03.687100000 Z
-          updated_at: 2012-11-21 22:48:03.687100000 Z
-          validations:
-            6:
-              id: 6
-              name: validates_presence_of
-              desc: ''
-              snippet: validates_presence_of :ATTR
-              created_at: 2012-11-21 22:48:25.136653000 Z
-              updated_at: 2012-11-21 22:48:25.136653000 Z
-        9:
-          id: 9
-          name: user_mlsid
-          display_name: MLS ID
-          step_id: 6
-          reck: 'false'
-          form_id: 2
-          element: select
-          created_at: 2012-11-26 16:28:43.137717000 Z
-          updated_at: 2012-11-26 16:28:43.137717000 Z
-          validations:
-            5:
-              id: 5
-              name: validates_presence_of
-              desc: ''
-              snippet: validates_presence_of :ATTR
-              created_at: 2012-11-21 20:57:02.713302000 Z
-              updated_at: 2012-11-21 21:00:29.586165000 Z
-    7:
-      id: 7
-      form_id: 2
-      name: signin
-      template: processor/steps/signin
-      prev_step_id: 6
-      next_step_id: 
-      position: 2
-      attrs_count: 
-      nav_step: 
-      nav_step_name: 
-      signin_required: false
-      before_snippet: ''
-      after_snippet: ''
-      created_at: 2012-11-26 16:31:16.004135000 Z
-      updated_at: 2012-11-26 16:33:32.853026000 Z
-      attrs: {}
-    8:
-      id: 8
-      form_id: 2
-      name: register
-      template: processor/steps/register
-      prev_step_id: 6
-      next_step_id: 
-      position: 3
-      attrs_count: 12
-      nav_step: 
-      nav_step_name: 
-      signin_required: false
-      before_snippet: ''
-      after_snippet: ''
-      created_at: 2012-11-26 16:32:49.609434000 Z
-      updated_at: 2012-11-26 17:58:29.417558000 Z
-      attrs:
-        10:
-          id: 10
-          name: user_firstname_display
-          display_name: First Name
-          step_id: 8
-          reck: 'false'
-          form_id: 2
-          element: input
-          created_at: 2012-11-26 18:00:07.829140000 Z
-          updated_at: 2012-11-26 18:00:07.829140000 Z
-          validations:
-            5:
-              id: 5
-              name: validates_presence_of
-              desc: ''
-              snippet: validates_presence_of :ATTR
-              created_at: 2012-11-21 20:57:02.713302000 Z
-              updated_at: 2012-11-21 21:00:29.586165000 Z
-        11:
-          id: 11
-          name: user_lastname_display
-          display_name: Last Name
-          step_id: 8
-          reck: 'false'
-          form_id: 2
-          element: input
-          created_at: 2012-11-26 18:00:33.445578000 Z
-          updated_at: 2012-11-26 18:00:33.445578000 Z
-          validations:
-            5:
-              id: 5
-              name: validates_presence_of
-              desc: ''
-              snippet: validates_presence_of :ATTR
-              created_at: 2012-11-21 20:57:02.713302000 Z
-              updated_at: 2012-11-21 21:00:29.586165000 Z
-        12:
-          id: 12
-          name: user_homeaddress_display
-          display_name: Address
-          step_id: 8
-          reck: 'false'
-          form_id: 2
-          element: input
-          created_at: 2012-11-26 18:00:53.618151000 Z
-          updated_at: 2012-11-26 18:00:53.618151000 Z
-          validations:
-            5:
-              id: 5
-              name: validates_presence_of
-              desc: ''
-              snippet: validates_presence_of :ATTR
-              created_at: 2012-11-21 20:57:02.713302000 Z
-              updated_at: 2012-11-21 21:00:29.586165000 Z
-        13:
-          id: 13
-          name: user_homecity_display
-          display_name: City
-          step_id: 8
-          reck: 'false'
-          form_id: 2
-          element: input
-          created_at: 2012-11-26 18:01:09.568078000 Z
-          updated_at: 2012-11-26 18:01:09.568078000 Z
-          validations:
-            5:
-              id: 5
-              name: validates_presence_of
-              desc: ''
-              snippet: validates_presence_of :ATTR
-              created_at: 2012-11-21 20:57:02.713302000 Z
-              updated_at: 2012-11-21 21:00:29.586165000 Z
-        14:
-          id: 14
-          name: user_homestate
-          display_name: State
-          step_id: 8
-          reck: 'false'
-          form_id: 2
-          element: select
-          created_at: 2012-11-26 18:01:29.703655000 Z
-          updated_at: 2012-11-26 18:01:29.703655000 Z
-          validations:
-            5:
-              id: 5
-              name: validates_presence_of
-              desc: ''
-              snippet: validates_presence_of :ATTR
-              created_at: 2012-11-21 20:57:02.713302000 Z
-              updated_at: 2012-11-21 21:00:29.586165000 Z
-        15:
-          id: 15
-          name: user_zipcode
-          display_name: ZIP
-          step_id: 8
-          reck: 'false'
-          form_id: 2
-          element: input
-          created_at: 2012-11-26 18:01:45.620316000 Z
-          updated_at: 2012-11-26 18:01:45.620316000 Z
-          validations:
-            5:
-              id: 5
-              name: validates_presence_of
-              desc: ''
-              snippet: validates_presence_of :ATTR
-              created_at: 2012-11-21 20:57:02.713302000 Z
-              updated_at: 2012-11-21 21:00:29.586165000 Z
-        16:
-          id: 16
-          name: user_email_display
-          display_name: Email
-          step_id: 8
-          reck: 'false'
-          form_id: 2
-          element: input
-          created_at: 2012-11-26 18:02:09.546089000 Z
-          updated_at: 2012-11-26 18:02:09.546089000 Z
-          validations:
-            5:
-              id: 5
-              name: validates_presence_of
-              desc: ''
-              snippet: validates_presence_of :ATTR
-              created_at: 2012-11-21 20:57:02.713302000 Z
-              updated_at: 2012-11-21 21:00:29.586165000 Z
-            7:
-              id: 7
-              name: validates_confirmation_of
-              desc: ''
-              snippet: validates_confirmation_of :ATTR, :message => "does not match
-                confirmation"
-              created_at: 2012-11-26 18:19:36.086017000 Z
-              updated_at: 2012-11-26 18:19:36.086017000 Z
-        17:
-          id: 17
-          name: user_username
-          display_name: Username
-          step_id: 8
-          reck: 'false'
-          form_id: 2
-          element: input
-          created_at: 2012-11-26 18:02:29.488923000 Z
-          updated_at: 2012-11-26 18:02:29.488923000 Z
-          validations:
-            5:
-              id: 5
-              name: validates_presence_of
-              desc: ''
-              snippet: validates_presence_of :ATTR
-              created_at: 2012-11-21 20:57:02.713302000 Z
-              updated_at: 2012-11-21 21:00:29.586165000 Z
-        18:
-          id: 18
-          name: user_userpassword
-          display_name: Password
-          step_id: 8
-          reck: 'false'
-          form_id: 2
-          element: password
-          created_at: 2012-11-26 18:02:48.268506000 Z
-          updated_at: 2012-11-26 18:02:48.268506000 Z
-          validations:
-            5:
-              id: 5
-              name: validates_presence_of
-              desc: ''
-              snippet: validates_presence_of :ATTR
-              created_at: 2012-11-21 20:57:02.713302000 Z
-              updated_at: 2012-11-21 21:00:29.586165000 Z
-            7:
-              id: 7
-              name: validates_confirmation_of
-              desc: ''
-              snippet: validates_confirmation_of :ATTR, :message => "does not match
-                confirmation"
-              created_at: 2012-11-26 18:19:36.086017000 Z
-              updated_at: 2012-11-26 18:19:36.086017000 Z
-        19:
-          id: 19
-          name: offer_seats
-          display_name: Subscription Licenses
-          step_id: 8
-          reck: 'false'
-          form_id: 2
-          element: input
-          created_at: 2012-11-26 18:06:57.745310000 Z
-          updated_at: 2012-11-26 18:06:57.745310000 Z
-          validations: {}
-        20:
-          id: 20
-          name: user_email_display_confirmation
-          display_name: Confirm Email
-          step_id: 8
-          reck: 'false'
-          form_id: 2
-          element: input
-          created_at: 2012-11-26 18:09:59.024082000 Z
-          updated_at: 2012-11-26 18:09:59.024082000 Z
-          validations:
-            5:
-              id: 5
-              name: validates_presence_of
-              desc: ''
-              snippet: validates_presence_of :ATTR
-              created_at: 2012-11-21 20:57:02.713302000 Z
-              updated_at: 2012-11-21 21:00:29.586165000 Z
-        21:
-          id: 21
-          name: user_userpassword_confirmation
-          display_name: Confirm Password
-          step_id: 8
-          reck: 'false'
-          form_id: 2
-          element: password
-          created_at: 2012-11-26 18:17:45.098185000 Z
-          updated_at: 2012-11-26 18:17:45.098185000 Z
-          validations:
-            5:
-              id: 5
-              name: validates_presence_of
-              desc: ''
-              snippet: validates_presence_of :ATTR
-              created_at: 2012-11-21 20:57:02.713302000 Z
-              updated_at: 2012-11-21 21:00:29.586165000 Z
-    9:
-      id: 9
-      form_id: 2
-      name: confirm
-      template: processor/steps/confirm
-      prev_step_id: 6
-      next_step_id: 
-      position: 4
-      attrs_count: 
-      nav_step: 
-      nav_step_name: 
-      signin_required: false
-      before_snippet: ''
-      after_snippet: ''
-      created_at: 2012-11-26 16:36:22.805629000 Z
-      updated_at: 2012-11-26 17:58:18.746412000 Z
-      attrs: {}
-    11:
-      id: 11
-      form_id: 2
-      name: accumulus_iframe
-      template: processor/steps/accumulus_iframe
+    15:
+      id: 15
+      form_id: 6
+      name: activate
+      template: confirmations/steps/activate.html.haml
       prev_step_id: 
       next_step_id: 
-      position: 6
-      attrs_count: 
+      position: 0
+      attrs_count: 1
       nav_step: 
       nav_step_name: 
       signin_required: false
       before_snippet: ''
-      after_snippet: ''
-      created_at: 2012-11-26 16:42:47.689970000 Z
-      updated_at: 2012-11-26 16:43:02.548828000 Z
-      attrs: {}
+      after_snippet: ! "if obj.valid\r\n  unless confirmation = Confirmation.find(merged_hash[\"confirmation_uuid\"])\r\n
+        \   obj.valid = false\r\n    obj.json = {:base => [\"Invalid Confirmation
+        ID: #{merged_hash['confirmation_uuid']}\"]}.to_json\r\n    return obj\r\n
+        \ end\r\n\r\n  unless user = User.find(merged_hash[\"user_uuid\"])\r\n    obj.valid
+        = false\r\n    obj.json = {:base => [\"Invalid User ID: #{merged_hash['user_uuid']}\"]}.to_json\r\n
+        \   return obj\r\n  end\r\n\r\n  confirmation.user_userid = user.user_userid\r\n
+        \ if confirmation.confirm!\r\n    flash_hash = {:flash => \"success\", :message
+        => \"Successfully activated license.\"}\r\n    local_redirect_hash = {:host
+        => WmsEcomm::Application.config.stepre[\"host\"], :only_path => true, :company_uuid
+        => merged_hash[\"company_uuid\"], :form_data => Stepre::Form.write_form_data(flash_hash)}\r\n
+        \   merged_hash[:redirect_to] = Rails.application.routes.url_helpers.dashboard_url(local_redirect_hash)\r\n
+        \ else\r\n    obj.valid = false\r\n    obj.json = {:base => [\"Error activating
+        license.\"]}.to_json\r\n    return obj\r\n  end\r\nend"
+      created_at: 2012-12-12 21:26:26.114653000 Z
+      updated_at: 2012-12-17 20:02:05.346940000 Z
+      attrs:
+        46:
+          id: 46
+          name: accepts
+          display_name: By checking this box you are agreeing to the terms and conditions
+            above.
+          step_id: 15
+          reck: 'false'
+          form_id: 6
+          element: input
+          created_at: 2012-12-12 21:35:19.067665000 Z
+          updated_at: 2012-12-12 21:35:19.067665000 Z
+          validations:
+            15:
+              id: 15
+              name: validates_presence_of TOS
+              desc: TOS checkbox validation
+              snippet: validates_presence_of :ATTR, :message => "must be checked"
+              created_at: 2012-12-11 23:30:39.122181000 Z
+              updated_at: 2012-12-11 23:31:34.667607000 Z
