@@ -1,0 +1,2 @@
+= f.input :user_mlsid, :collection => current_company.mls_select_array, :prompt => "Select your MLS", :hint => "#{"&nbsp;" * 3}<em>First, select your MLS.</em>", :label => "MLS ID", :input_html => {:class => css_class ||= nil}
+= f.input :user_mlsagent, :disabled => true, :hint => "#{"&nbsp;" * 3}<em>Second, enter your Agent MLS ID number.</em>", :label => "Agent MLS ID", :input_html => {:class => css_class ||= nil}

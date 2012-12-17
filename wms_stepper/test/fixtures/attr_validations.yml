@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  attr_id: 1
+  validation_id: 1
+  order: 1
+
+two:
+  attr_id: 1
+  validation_id: 1
+  order: 1

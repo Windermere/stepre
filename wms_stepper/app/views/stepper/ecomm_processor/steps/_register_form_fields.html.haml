@@ -1,0 +1,14 @@
+- User::REQ_KEYS.each do |k|
+  - case k
+  - when /homestate/
+    = f.input k.to_sym, :required => true, :collection => User::STATES, :label => User::KEY_DESC[k]
+  - when /password/i 
+    = f.input k.to_sym, :required => true, :label => User::KEY_DESC[k], :input_html => {:maxlength => 20, :value => params[model_name].fetch(k, nil)}
+  - else
+    = f.input k.to_sym, :required => true, :label => User::KEY_DESC[k]
+
+  - case k
+  - when /password/i
+    = f.input "#{k}_confirmation".to_sym, :required => true, :label => "Confirm #{User::KEY_DESC[k]}", :input_html => {:maxlength => 20, :value => params[model_name].fetch("#{k}_confirmation", nil) || actual_model.send(k)}
+  - when /email/i
+    = f.input "#{k}_confirmation".to_sym, :required => true, :label => "Confirm #{User::KEY_DESC[k]}", :input_html => {:value => params[model_name].fetch("#{k}_confirmation", nil) || actual_model.send(k)}
