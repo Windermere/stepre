@@ -15,12 +15,12 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem "therubyracer"
+  gem 'libv8', '~> 3.11.8'
   gem "less-rails" 
-  gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
-
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'haml-rails'
 gem 'rabl'
 gem 'simple_form'
@@ -33,4 +33,3 @@ gem 'recursive_open_struct', :git => "git://github.com/awesome/recursive_open_st
 #
 # http://thechangelog.com/post/21217781637/quiet-assets-silence-asset-pipeline-messages
 gem 'quiet_assets', :group => :development
-
