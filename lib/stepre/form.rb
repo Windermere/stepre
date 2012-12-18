@@ -44,7 +44,7 @@ module Stepre
       # create form object--vehicle for processed form data
       hsh = {
         :valid => true, 
-        :merged_hash => merged_hash,
+        :merged_hash => {},
         :params_hash => params_hash,
         :step => nil,
         :new_hash => {},
