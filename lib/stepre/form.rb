@@ -67,7 +67,7 @@ module Stepre
       # previous button pressed?
       if obj.prev_button = !!obj.new_hash.delete("prev_button")
         # remove future step attrs
-        step.attrs.each {|o| obj.old_hash.delete(o.name)}
+        obj.step.attrs.each {|o| obj.old_hash.delete(o.name)}
         obj.old_hash["step_id"] = obj.step.prev_step_id
         obj.json = {:form_data => Stepre::Form.write_form_data(obj.old_hash)}.to_json
         return obj
@@ -81,33 +81,33 @@ module Stepre
       #self.instance_eval("raise self.inspect")
       self.instance_eval(obj.step.before_snippet) if obj.step.before_snippet
 
-      before_method = "#{self.name}_#{step.name}_before"
+      before_method = "#{self.name}_#{obj.step.name}_before"
       if Stepre::Form::Snippets.respond_to?(before_method)
         Stepre::Form::Snippets.send(before_method, obj)
         return obj if obj.return
       end
 
       # run all validations on current step attrs
-      step.custom_validate(obj.merged_hash) unless obj.prev_button or obj.merged_hash["skip_validations"]
+      obj.step.custom_validate(obj.merged_hash) unless obj.prev_button or obj.merged_hash["skip_validations"]
 
       case
       when obj.merged_hash.delete("skip_validations")
         # do nothing
-      #when prev_button && !step.is_first_step?
-      #  merged_hash["step_id"] = step.prev_step_id
+      #when prev_button && !obj.step.is_first_step?
+      #  merged_hash["step_id"] = obj.step.prev_step_id
       when obj.step.errors.any?
         obj.json = obj.step.errors.to_json
         obj.valid = false
       when obj.step.is_last_step?
         obj.merged_hash["redirect_to"] = self.redirect_to || "/"
       else
-        obj.merged_hash["step_id"] = step.next_step_id
+        obj.merged_hash["step_id"] = obj.step.next_step_id
       end
 
       # logic in eval can be moved to appropriate location later
       self.instance_eval(obj.step.after_snippet) if obj.step.after_snippet
 
-      after_method = "#{self.name}_#{step.name}_after"
+      after_method = "#{self.name}_#{obj.step.name}_after"
       if Stepre::Form::Snippets.respond_to? after_method
         Stepre::Form::Snippets.send(after_method, obj)
         return obj if obj.return
