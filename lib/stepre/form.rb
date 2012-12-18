@@ -67,7 +67,7 @@ module Stepre
       # previous button pressed?
       if obj.prev_button = !!obj.new_hash.delete("prev_button")
         # remove future step attrs
-        step.attrs.each {|o| obj.old_hash.delete(o.name)}
+        obj.step.attrs.each {|o| obj.old_hash.delete(o.name)}
         obj.old_hash["step_id"] = obj.step.prev_step_id
         obj.json = {:form_data => Stepre::Form.write_form_data(obj.old_hash)}.to_json
         return obj
