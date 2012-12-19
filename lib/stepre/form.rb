@@ -97,6 +97,7 @@ module Stepre
       #  merged_hash["step_id"] = obj.step.prev_step_id
       when obj.step.errors.any?
         obj.json = obj.step.errors.to_json
+        obj.step.errors.clear
         obj.valid = false
       when obj.step.is_last_step?
         obj.merged_hash["redirect_to"] = self.redirect_to || "/"
