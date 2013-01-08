@@ -1,87 +1,66 @@
 ---
-5:
-  id: 5
-  name: signin_to_confirm
+7:
+  id: 7
+  name: office365
   cancel_url: ''
-  element: stepre
+  element: office365
   redirect_to: ''
-  steps_count: 1
-  attrs_count: 3
+  steps_count: 3
+  attrs_count: 0
   nav: false
-  first_step_id: 14
-  last_step_id: 14
-  created_at: 2012-12-12 18:46:43.326016000 Z
-  updated_at: 2012-12-12 18:50:50.295121000 Z
+  first_step_id: 16
+  last_step_id: 16
+  created_at: 2013-01-04 20:24:59.802019000 Z
+  updated_at: 2013-01-04 20:31:15.160698000 Z
   steps:
-    14:
-      id: 14
-      form_id: 5
-      name: activate
-      template: confirmations/steps/signin.html.haml
+    16:
+      id: 16
+      form_id: 7
+      name: start
+      template: office365/steps/start
       prev_step_id: 
-      next_step_id: 
-      position: 0
-      attrs_count: 3
+      next_step_id: 17
+      position: 1
+      attrs_count: 
       nav_step: 
       nav_step_name: 
       signin_required: false
       before_snippet: ''
       after_snippet: ''
-      created_at: 2012-12-12 18:47:11.594250000 Z
-      updated_at: 2012-12-18 01:00:25.658500000 Z
-      attrs:
-        43:
-          id: 43
-          name: user_username
-          display_name: ''
-          step_id: 14
-          reck: 'false'
-          form_id: 5
-          element: input
-          created_at: 2012-12-12 18:48:17.566672000 Z
-          updated_at: 2012-12-12 18:48:17.566672000 Z
-          validations:
-            5:
-              id: 5
-              name: validates_presence_of
-              desc: ''
-              snippet: validates_presence_of :ATTR
-              created_at: 2012-11-21 20:57:02.713302000 Z
-              updated_at: 2012-11-21 21:00:29.586165000 Z
-        44:
-          id: 44
-          name: user_userpassword
-          display_name: Password
-          step_id: 14
-          reck: 'false'
-          form_id: 5
-          element: input
-          created_at: 2012-12-12 18:48:55.418093000 Z
-          updated_at: 2012-12-12 18:48:55.418093000 Z
-          validations:
-            5:
-              id: 5
-              name: validates_presence_of
-              desc: ''
-              snippet: validates_presence_of :ATTR
-              created_at: 2012-11-21 20:57:02.713302000 Z
-              updated_at: 2012-11-21 21:00:29.586165000 Z
-        45:
-          id: 45
-          name: accepts
-          display_name: By checking this box you are agreeing to the terms and conditions
-            above.
-          step_id: 14
-          reck: 'false'
-          form_id: 5
-          element: input
-          created_at: 2012-12-12 18:49:53.966315000 Z
-          updated_at: 2012-12-12 18:49:53.966315000 Z
-          validations:
-            15:
-              id: 15
-              name: validates_presence_of TOS
-              desc: TOS checkbox validation
-              snippet: validates_presence_of :ATTR, :message => "must be checked"
-              created_at: 2012-12-11 23:30:39.122181000 Z
-              updated_at: 2012-12-11 23:31:34.667607000 Z
+      created_at: 2013-01-04 20:28:11.836217000 Z
+      updated_at: 2013-01-05 00:32:50.523254000 Z
+      attrs: {}
+    17:
+      id: 17
+      form_id: 7
+      name: user_account
+      template: office365/steps/user_account
+      prev_step_id: 16
+      next_step_id: 18
+      position: 2
+      attrs_count: 
+      nav_step: 
+      nav_step_name: 
+      signin_required: false
+      before_snippet: ''
+      after_snippet: ''
+      created_at: 2013-01-05 00:30:18.798629000 Z
+      updated_at: 2013-01-05 00:33:04.054418000 Z
+      attrs: {}
+    18:
+      id: 18
+      form_id: 7
+      name: payment
+      template: office365/steps_custom/accumulus_iframe
+      prev_step_id: 17
+      next_step_id: 
+      position: 3
+      attrs_count: 
+      nav_step: 
+      nav_step_name: 
+      signin_required: false
+      before_snippet: ''
+      after_snippet: ''
+      created_at: 2013-01-05 00:32:27.276866000 Z
+      updated_at: 2013-01-05 00:33:40.873799000 Z
+      attrs: {}
