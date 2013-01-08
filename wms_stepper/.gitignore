@@ -26,3 +26,6 @@ public/assets/
 
 .DS_Store
 .sass-cache
+
+# ingnore generated config yaml (changes for every form, yet all forms share single file address)
+config/config_yaml.yaml
