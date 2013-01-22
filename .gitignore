@@ -1,3 +1,5 @@
+atlassian-ide-plugin.xml
+.idea
 *.gem
 *.rbc
 .bundle
