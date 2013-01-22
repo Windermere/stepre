@@ -36,7 +36,8 @@ class Form < ActiveRecord::Base
   end
 
   def write_config_yaml!(file="#{Rails.root}/config/config_yaml.yaml")
-    File.exist?(file) ? (File.open(file, 'w') {|f| f.write(self.to_config_hash.to_yaml)}) : raise("invalid file")
+    #File.exist?(file) ? (File.open(file, 'w') {|f| f.write(self.to_config_hash.to_yaml)}) : raise("invalid file")
+    File.open(file, 'w') {|f| f.write(self.to_config_hash.to_yaml)}
   end
 
   def first_step

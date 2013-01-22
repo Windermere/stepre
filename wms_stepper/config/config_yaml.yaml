@@ -1,0 +1,225 @@
+---
+7:
+  id: 7
+  name: office365
+  cancel_url: ''
+  element: office365
+  redirect_to: ''
+  steps_count: 3
+  attrs_count: 11
+  nav: false
+  first_step_id: 16
+  last_step_id: 16
+  created_at: 2013-01-04 20:24:59.802019000 Z
+  updated_at: 2013-01-04 20:31:15.160698000 Z
+  steps:
+    16:
+      id: 16
+      form_id: 7
+      name: start
+      template: office365/steps/start
+      prev_step_id: 
+      next_step_id: 17
+      position: 1
+      attrs_count: 
+      nav_step: 
+      nav_step_name: 
+      signin_required: false
+      before_snippet: ''
+      after_snippet: ''
+      created_at: 2013-01-04 20:28:11.836217000 Z
+      updated_at: 2013-01-05 00:32:50.523254000 Z
+      attrs: {}
+    17:
+      id: 17
+      form_id: 7
+      name: user_account
+      template: office365/steps/user_account
+      prev_step_id: 16
+      next_step_id: 18
+      position: 2
+      attrs_count: 11
+      nav_step: 
+      nav_step_name: 
+      signin_required: false
+      before_snippet: ''
+      after_snippet: ''
+      created_at: 2013-01-05 00:30:18.798629000 Z
+      updated_at: 2013-01-05 00:33:04.054418000 Z
+      attrs:
+        47:
+          id: 47
+          name: user_firstname_display
+          display_name: First Name
+          step_id: 17
+          reck: 'false'
+          form_id: 7
+          element: input
+          created_at: 2013-01-07 22:43:10.722233000 Z
+          updated_at: 2013-01-07 22:43:10.722233000 Z
+          validations: {}
+        48:
+          id: 48
+          name: user_lastname_display
+          display_name: Last Name
+          step_id: 17
+          reck: 'false'
+          form_id: 7
+          element: input
+          created_at: 2013-01-07 22:43:31.228698000 Z
+          updated_at: 2013-01-07 22:43:31.228698000 Z
+          validations: {}
+        49:
+          id: 49
+          name: user_homeaddress_display
+          display_name: Address
+          step_id: 17
+          reck: 'false'
+          form_id: 7
+          element: input
+          created_at: 2013-01-07 22:46:51.316938000 Z
+          updated_at: 2013-01-07 22:46:51.316938000 Z
+          validations: {}
+        50:
+          id: 50
+          name: user_homecity_display
+          display_name: City
+          step_id: 17
+          reck: 'false'
+          form_id: 7
+          element: input
+          created_at: 2013-01-07 22:47:09.380021000 Z
+          updated_at: 2013-01-07 22:47:09.380021000 Z
+          validations: {}
+        51:
+          id: 51
+          name: user_homestate
+          display_name: State
+          step_id: 17
+          reck: 'false'
+          form_id: 7
+          element: input
+          created_at: 2013-01-07 22:47:26.860494000 Z
+          updated_at: 2013-01-07 22:47:26.860494000 Z
+          validations: {}
+        52:
+          id: 52
+          name: user_zipcode
+          display_name: ZIP
+          step_id: 17
+          reck: 'false'
+          form_id: 7
+          element: input
+          created_at: 2013-01-07 22:59:41.991400000 Z
+          updated_at: 2013-01-07 22:59:41.991400000 Z
+          validations: {}
+        53:
+          id: 53
+          name: user_email_alt_display
+          display_name: Email
+          step_id: 17
+          reck: 'false'
+          form_id: 7
+          element: input
+          created_at: 2013-01-07 23:00:08.334709000 Z
+          updated_at: 2013-01-08 00:56:43.261789000 Z
+          validations:
+            5:
+              id: 5
+              name: validates_presence_of
+              desc: ''
+              snippet: validates_presence_of :ATTR
+              created_at: 2012-11-21 20:57:02.713302000 Z
+              updated_at: 2012-11-21 21:00:29.586165000 Z
+            12:
+              id: 12
+              name: validates_email_format_of :email
+              desc: ''
+              snippet: validates_email_format_of :ATTR
+              created_at: 2012-12-07 01:58:07.413929000 Z
+              updated_at: 2012-12-07 01:58:07.413929000 Z
+            7:
+              id: 7
+              name: validates_confirmation_of
+              desc: ''
+              snippet: validates_confirmation_of :ATTR, :message => "does not match
+                confirmation"
+              created_at: 2012-11-26 18:19:36.086017000 Z
+              updated_at: 2012-11-26 18:19:36.086017000 Z
+            17:
+              id: 17
+              name: validates email is alt
+              desc: ''
+              snippet: ! 'validates_format_of :ATTR, :with => /@(?!#{hash[''exclude_email_host'']}\.)[^.]+/,
+                :allow_blank => true, :message => "Cannot use #{hash[''exclude_email_host'']}
+                email"'
+              created_at: 2013-01-08 01:21:25.800861000 Z
+              updated_at: 2013-01-08 18:15:09.086104000 Z
+        54:
+          id: 54
+          name: user_email_alt_display_confirmation
+          display_name: Confirm Email
+          step_id: 17
+          reck: 'false'
+          form_id: 7
+          element: input
+          created_at: 2013-01-07 23:00:27.972824000 Z
+          updated_at: 2013-01-08 00:56:56.199906000 Z
+          validations:
+            5:
+              id: 5
+              name: validates_presence_of
+              desc: ''
+              snippet: validates_presence_of :ATTR
+              created_at: 2012-11-21 20:57:02.713302000 Z
+              updated_at: 2012-11-21 21:00:29.586165000 Z
+        55:
+          id: 55
+          name: offer_seats
+          display_name: Subscription Licenses
+          step_id: 17
+          reck: 'false'
+          form_id: 7
+          element: input
+          created_at: 2013-01-07 23:00:52.437949000 Z
+          updated_at: 2013-01-07 23:00:52.437949000 Z
+          validations: {}
+        56:
+          id: 56
+          name: user_mlsagent
+          display_name: Agent ID
+          step_id: 17
+          reck: 'false'
+          form_id: 7
+          element: input
+          created_at: 2013-01-07 23:05:41.702421000 Z
+          updated_at: 2013-01-07 23:05:41.702421000 Z
+          validations: {}
+        57:
+          id: 57
+          name: user_mlsid
+          display_name: MLS ID
+          step_id: 17
+          reck: 'false'
+          form_id: 7
+          element: input
+          created_at: 2013-01-07 23:05:54.772982000 Z
+          updated_at: 2013-01-07 23:05:54.772982000 Z
+          validations: {}
+    18:
+      id: 18
+      form_id: 7
+      name: payment
+      template: office365/steps_custom/accumulus_iframe
+      prev_step_id: 17
+      next_step_id: 
+      position: 3
+      attrs_count: 
+      nav_step: 
+      nav_step_name: 
+      signin_required: false
+      before_snippet: ''
+      after_snippet: ''
+      created_at: 2013-01-05 00:32:27.276866000 Z
+      updated_at: 2013-01-05 00:33:40.873799000 Z
+      attrs: {}
