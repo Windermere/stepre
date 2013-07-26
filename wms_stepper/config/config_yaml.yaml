@@ -1,225 +1,678 @@
 ---
-7:
-  id: 7
-  name: office365
-  cancel_url: ''
-  element: office365
+2:
+  id: 2
+  name: cma_offers
+  cancel_url: /offers/WEB_CMA
+  element: processor
   redirect_to: ''
-  steps_count: 3
-  attrs_count: 11
+  steps_count: 6
+  attrs_count: 23
   nav: false
-  first_step_id: 16
-  last_step_id: 16
-  created_at: 2013-01-04 20:24:59.802019000 Z
-  updated_at: 2013-01-04 20:31:15.160698000 Z
+  first_step_id: 5
+  last_step_id: 11
+  created_at: 2012-11-21 21:21:21.003641000Z
+  updated_at: 2012-12-13 00:01:24.691093000Z
   steps:
-    16:
-      id: 16
-      form_id: 7
+    5:
+      id: 5
+      form_id: 2
       name: start
-      template: office365/steps/start
-      prev_step_id: 
-      next_step_id: 17
+      template: processor/steps/start
+      prev_step_id: !!null 
+      next_step_id: 6
       position: 1
-      attrs_count: 
-      nav_step: 
-      nav_step_name: 
+      attrs_count: !!null 
+      nav_step: !!null 
+      nav_step_name: !!null 
       signin_required: false
       before_snippet: ''
       after_snippet: ''
-      created_at: 2013-01-04 20:28:11.836217000 Z
-      updated_at: 2013-01-05 00:32:50.523254000 Z
+      created_at: 2012-11-21 21:39:28.885190000Z
+      updated_at: 2012-12-18 00:45:07.964562000Z
       attrs: {}
-    17:
-      id: 17
-      form_id: 7
-      name: user_account
-      template: office365/steps/user_account
-      prev_step_id: 16
-      next_step_id: 18
+    6:
+      id: 6
+      form_id: 2
+      name: mls
+      template: processor/steps_custom/mls
+      prev_step_id: 5
+      next_step_id: 8
       position: 2
-      attrs_count: 11
-      nav_step: 
-      nav_step_name: 
+      attrs_count: 2
+      nav_step: !!null 
+      nav_step_name: !!null 
       signin_required: false
       before_snippet: ''
       after_snippet: ''
-      created_at: 2013-01-05 00:30:18.798629000 Z
-      updated_at: 2013-01-05 00:33:04.054418000 Z
+      created_at: 2012-11-21 21:43:51.732797000Z
+      updated_at: 2012-12-18 00:46:15.535966000Z
       attrs:
-        47:
-          id: 47
-          name: user_firstname_display
-          display_name: First Name
-          step_id: 17
+        8:
+          id: 8
+          name: user_mlsagent
+          display_name: MLS Agent
+          step_id: 6
           reck: 'false'
-          form_id: 7
+          form_id: 2
           element: input
-          created_at: 2013-01-07 22:43:10.722233000 Z
-          updated_at: 2013-01-07 22:43:10.722233000 Z
-          validations: {}
-        48:
-          id: 48
-          name: user_lastname_display
-          display_name: Last Name
-          step_id: 17
+          created_at: 2012-11-21 22:48:03.687100000Z
+          updated_at: 2012-11-21 22:48:03.687100000Z
+          validations:
+            6:
+              id: 6
+              name: validates_presence_of
+              desc: ''
+              snippet: validates_presence_of :ATTR
+              created_at: 2012-11-21 22:48:25.136653000Z
+              updated_at: 2012-11-21 22:48:25.136653000Z
+            14:
+              id: 14
+              name: validates_length_of max => 60
+              desc: ''
+              snippet: validates_length_of :ATTR, :maximum => 60
+              created_at: 2012-12-07 02:15:05.999765000Z
+              updated_at: 2012-12-07 02:15:05.999765000Z
+        9:
+          id: 9
+          name: user_mlsid
+          display_name: MLS ID
+          step_id: 6
           reck: 'false'
-          form_id: 7
-          element: input
-          created_at: 2013-01-07 22:43:31.228698000 Z
-          updated_at: 2013-01-07 22:43:31.228698000 Z
-          validations: {}
-        49:
-          id: 49
-          name: user_homeaddress_display
-          display_name: Address
-          step_id: 17
-          reck: 'false'
-          form_id: 7
-          element: input
-          created_at: 2013-01-07 22:46:51.316938000 Z
-          updated_at: 2013-01-07 22:46:51.316938000 Z
-          validations: {}
-        50:
-          id: 50
-          name: user_homecity_display
-          display_name: City
-          step_id: 17
-          reck: 'false'
-          form_id: 7
-          element: input
-          created_at: 2013-01-07 22:47:09.380021000 Z
-          updated_at: 2013-01-07 22:47:09.380021000 Z
-          validations: {}
-        51:
-          id: 51
-          name: user_homestate
-          display_name: State
-          step_id: 17
-          reck: 'false'
-          form_id: 7
-          element: input
-          created_at: 2013-01-07 22:47:26.860494000 Z
-          updated_at: 2013-01-07 22:47:26.860494000 Z
-          validations: {}
-        52:
-          id: 52
-          name: user_zipcode
-          display_name: ZIP
-          step_id: 17
-          reck: 'false'
-          form_id: 7
-          element: input
-          created_at: 2013-01-07 22:59:41.991400000 Z
-          updated_at: 2013-01-07 22:59:41.991400000 Z
-          validations: {}
-        53:
-          id: 53
-          name: user_email_alt_display
-          display_name: Email
-          step_id: 17
-          reck: 'false'
-          form_id: 7
-          element: input
-          created_at: 2013-01-07 23:00:08.334709000 Z
-          updated_at: 2013-01-08 00:56:43.261789000 Z
+          form_id: 2
+          element: select
+          created_at: 2012-11-26 16:28:43.137717000Z
+          updated_at: 2012-11-26 16:28:43.137717000Z
           validations:
             5:
               id: 5
               name: validates_presence_of
               desc: ''
               snippet: validates_presence_of :ATTR
-              created_at: 2012-11-21 20:57:02.713302000 Z
-              updated_at: 2012-11-21 21:00:29.586165000 Z
-            12:
-              id: 12
-              name: validates_email_format_of :email
+              created_at: 2012-11-21 20:57:02.713302000Z
+              updated_at: 2012-11-21 21:00:29.586165000Z
+    7:
+      id: 7
+      form_id: 2
+      name: signin
+      template: processor/steps_custom/signin
+      prev_step_id: 6
+      next_step_id: 9
+      position: 3
+      attrs_count: 2
+      nav_step: !!null 
+      nav_step_name: !!null 
+      signin_required: false
+      before_snippet: ''
+      after_snippet: ''
+      created_at: 2012-11-26 16:31:16.004135000Z
+      updated_at: 2012-12-18 00:46:29.274253000Z
+      attrs:
+        22:
+          id: 22
+          name: user_username
+          display_name: Username
+          step_id: 7
+          reck: 'false'
+          form_id: 2
+          element: input
+          created_at: 2012-12-03 23:04:44.734609000Z
+          updated_at: 2012-12-03 23:04:44.734609000Z
+          validations:
+            6:
+              id: 6
+              name: validates_presence_of
               desc: ''
-              snippet: validates_email_format_of :ATTR
-              created_at: 2012-12-07 01:58:07.413929000 Z
-              updated_at: 2012-12-07 01:58:07.413929000 Z
+              snippet: validates_presence_of :ATTR
+              created_at: 2012-11-21 22:48:25.136653000Z
+              updated_at: 2012-11-21 22:48:25.136653000Z
+        23:
+          id: 23
+          name: user_userpassword
+          display_name: Password
+          step_id: 7
+          reck: 'false'
+          form_id: 2
+          element: input
+          created_at: 2012-12-04 00:51:26.409160000Z
+          updated_at: 2012-12-04 00:51:37.694583000Z
+          validations:
+            5:
+              id: 5
+              name: validates_presence_of
+              desc: ''
+              snippet: validates_presence_of :ATTR
+              created_at: 2012-11-21 20:57:02.713302000Z
+              updated_at: 2012-11-21 21:00:29.586165000Z
+    8:
+      id: 8
+      form_id: 2
+      name: register
+      template: processor/steps/register
+      prev_step_id: 6
+      next_step_id: 11
+      position: 3
+      attrs_count: 12
+      nav_step: !!null 
+      nav_step_name: !!null 
+      signin_required: false
+      before_snippet: ''
+      after_snippet: ''
+      created_at: 2012-11-26 16:32:49.609434000Z
+      updated_at: 2012-12-18 00:46:48.027136000Z
+      attrs:
+        10:
+          id: 10
+          name: user_firstname_display
+          display_name: First Name
+          step_id: 8
+          reck: 'false'
+          form_id: 2
+          element: input
+          created_at: 2012-11-26 18:00:07.829140000Z
+          updated_at: 2012-11-26 18:00:07.829140000Z
+          validations:
+            5:
+              id: 5
+              name: validates_presence_of
+              desc: ''
+              snippet: validates_presence_of :ATTR
+              created_at: 2012-11-21 20:57:02.713302000Z
+              updated_at: 2012-11-21 21:00:29.586165000Z
+            16:
+              id: 16
+              name: validates_length_of 2..60
+              desc: ''
+              snippet: validates_length_of :ATTR, :minimum => 2, :maximum => 60
+              created_at: 2012-12-12 23:49:45.864311000Z
+              updated_at: 2012-12-12 23:49:45.864311000Z
+        11:
+          id: 11
+          name: user_lastname_display
+          display_name: Last Name
+          step_id: 8
+          reck: 'false'
+          form_id: 2
+          element: input
+          created_at: 2012-11-26 18:00:33.445578000Z
+          updated_at: 2012-11-26 18:00:33.445578000Z
+          validations:
+            5:
+              id: 5
+              name: validates_presence_of
+              desc: ''
+              snippet: validates_presence_of :ATTR
+              created_at: 2012-11-21 20:57:02.713302000Z
+              updated_at: 2012-11-21 21:00:29.586165000Z
+            16:
+              id: 16
+              name: validates_length_of 2..60
+              desc: ''
+              snippet: validates_length_of :ATTR, :minimum => 2, :maximum => 60
+              created_at: 2012-12-12 23:49:45.864311000Z
+              updated_at: 2012-12-12 23:49:45.864311000Z
+        12:
+          id: 12
+          name: user_homeaddress_display
+          display_name: Address
+          step_id: 8
+          reck: 'false'
+          form_id: 2
+          element: input
+          created_at: 2012-11-26 18:00:53.618151000Z
+          updated_at: 2012-11-26 18:00:53.618151000Z
+          validations:
+            5:
+              id: 5
+              name: validates_presence_of
+              desc: ''
+              snippet: validates_presence_of :ATTR
+              created_at: 2012-11-21 20:57:02.713302000Z
+              updated_at: 2012-11-21 21:00:29.586165000Z
+            9:
+              id: 9
+              name: validates_length_of max => 256
+              desc: ''
+              snippet: validates_length_of :ATTR, :maximum => 256
+              created_at: 2012-12-07 01:40:06.863330000Z
+              updated_at: 2012-12-07 01:40:06.863330000Z
+        13:
+          id: 13
+          name: user_homecity_display
+          display_name: City
+          step_id: 8
+          reck: 'false'
+          form_id: 2
+          element: input
+          created_at: 2012-11-26 18:01:09.568078000Z
+          updated_at: 2012-11-26 18:01:09.568078000Z
+          validations:
+            5:
+              id: 5
+              name: validates_presence_of
+              desc: ''
+              snippet: validates_presence_of :ATTR
+              created_at: 2012-11-21 20:57:02.713302000Z
+              updated_at: 2012-11-21 21:00:29.586165000Z
+        14:
+          id: 14
+          name: user_homestate
+          display_name: State
+          step_id: 8
+          reck: 'false'
+          form_id: 2
+          element: select
+          created_at: 2012-11-26 18:01:29.703655000Z
+          updated_at: 2012-11-26 18:01:29.703655000Z
+          validations:
+            5:
+              id: 5
+              name: validates_presence_of
+              desc: ''
+              snippet: validates_presence_of :ATTR
+              created_at: 2012-11-21 20:57:02.713302000Z
+              updated_at: 2012-11-21 21:00:29.586165000Z
+            13:
+              id: 13
+              name: validates_inclusion_of :state
+              desc: ''
+              snippet: validates_inclusion_of :ATTR, :in => User::STATES_V, :message
+                => "invalid US state"
+              created_at: 2012-12-07 02:09:09.260177000Z
+              updated_at: 2012-12-07 02:20:51.781466000Z
+        15:
+          id: 15
+          name: user_zipcode
+          display_name: ZIP
+          step_id: 8
+          reck: 'false'
+          form_id: 2
+          element: input
+          created_at: 2012-11-26 18:01:45.620316000Z
+          updated_at: 2012-11-26 18:01:45.620316000Z
+          validations:
+            5:
+              id: 5
+              name: validates_presence_of
+              desc: ''
+              snippet: validates_presence_of :ATTR
+              created_at: 2012-11-21 20:57:02.713302000Z
+              updated_at: 2012-11-21 21:00:29.586165000Z
+            10:
+              id: 10
+              name: validates_format_of :zipcode
+              desc: ''
+              snippet: ! 'validates_format_of :ATTR, :with => /^\d{5}(-\d{4})?$/,
+                :message => "should look like: 12345 or 12345-1234"'
+              created_at: 2012-12-07 01:47:36.023102000Z
+              updated_at: 2012-12-12 23:53:50.400545000Z
+        16:
+          id: 16
+          name: user_email_display
+          display_name: Email
+          step_id: 8
+          reck: 'false'
+          form_id: 2
+          element: input
+          created_at: 2012-11-26 18:02:09.546089000Z
+          updated_at: 2012-11-26 18:02:09.546089000Z
+          validations:
+            5:
+              id: 5
+              name: validates_presence_of
+              desc: ''
+              snippet: validates_presence_of :ATTR
+              created_at: 2012-11-21 20:57:02.713302000Z
+              updated_at: 2012-11-21 21:00:29.586165000Z
             7:
               id: 7
               name: validates_confirmation_of
               desc: ''
               snippet: validates_confirmation_of :ATTR, :message => "does not match
                 confirmation"
-              created_at: 2012-11-26 18:19:36.086017000 Z
-              updated_at: 2012-11-26 18:19:36.086017000 Z
-            17:
-              id: 17
-              name: validates email is alt
+              created_at: 2012-11-26 18:19:36.086017000Z
+              updated_at: 2012-11-26 18:19:36.086017000Z
+            12:
+              id: 12
+              name: validates_email_format_of :email
               desc: ''
-              snippet: ! 'validates_format_of :ATTR, :with => /@(?!#{hash[''exclude_email_host'']}\.)[^.]+/,
-                :allow_blank => true, :message => "Cannot use #{hash[''exclude_email_host'']}
-                email"'
-              created_at: 2013-01-08 01:21:25.800861000 Z
-              updated_at: 2013-01-08 18:15:09.086104000 Z
-        54:
-          id: 54
-          name: user_email_alt_display_confirmation
-          display_name: Confirm Email
-          step_id: 17
+              snippet: validates_email_format_of :ATTR
+              created_at: 2012-12-07 01:58:07.413929000Z
+              updated_at: 2012-12-07 01:58:07.413929000Z
+        17:
+          id: 17
+          name: user_username
+          display_name: Username
+          step_id: 8
           reck: 'false'
-          form_id: 7
+          form_id: 2
           element: input
-          created_at: 2013-01-07 23:00:27.972824000 Z
-          updated_at: 2013-01-08 00:56:56.199906000 Z
+          created_at: 2012-11-26 18:02:29.488923000Z
+          updated_at: 2012-11-26 18:02:29.488923000Z
           validations:
             5:
               id: 5
               name: validates_presence_of
               desc: ''
               snippet: validates_presence_of :ATTR
-              created_at: 2012-11-21 20:57:02.713302000 Z
-              updated_at: 2012-11-21 21:00:29.586165000 Z
-        55:
-          id: 55
+              created_at: 2012-11-21 20:57:02.713302000Z
+              updated_at: 2012-11-21 21:00:29.586165000Z
+            8:
+              id: 8
+              name: validates_length_of 6..60
+              desc: ''
+              snippet: validates_length_of :ATTR, :minimum => 6, :maximum => 60
+              created_at: 2012-12-07 01:33:59.912796000Z
+              updated_at: 2012-12-07 02:18:13.293468000Z
+        18:
+          id: 18
+          name: user_userpassword
+          display_name: Password
+          step_id: 8
+          reck: 'false'
+          form_id: 2
+          element: password
+          created_at: 2012-11-26 18:02:48.268506000Z
+          updated_at: 2012-11-26 18:02:48.268506000Z
+          validations:
+            5:
+              id: 5
+              name: validates_presence_of
+              desc: ''
+              snippet: validates_presence_of :ATTR
+              created_at: 2012-11-21 20:57:02.713302000Z
+              updated_at: 2012-11-21 21:00:29.586165000Z
+            7:
+              id: 7
+              name: validates_confirmation_of
+              desc: ''
+              snippet: validates_confirmation_of :ATTR, :message => "does not match
+                confirmation"
+              created_at: 2012-11-26 18:19:36.086017000Z
+              updated_at: 2012-11-26 18:19:36.086017000Z
+            8:
+              id: 8
+              name: validates_length_of 6..60
+              desc: ''
+              snippet: validates_length_of :ATTR, :minimum => 6, :maximum => 60
+              created_at: 2012-12-07 01:33:59.912796000Z
+              updated_at: 2012-12-07 02:18:13.293468000Z
+            18:
+              id: 18
+              name: validates_format_of password regex
+              desc: no spaces
+              snippet: validates_format_of :ATTR, :with => /\A[\S]+\z/, :message =>
+                "can't contain spaces"
+              created_at: 2013-07-26 20:57:05.522417000Z
+              updated_at: 2013-07-26 21:09:00.866615000Z
+        19:
+          id: 19
           name: offer_seats
           display_name: Subscription Licenses
-          step_id: 17
+          step_id: 8
           reck: 'false'
-          form_id: 7
+          form_id: 2
           element: input
-          created_at: 2013-01-07 23:00:52.437949000 Z
-          updated_at: 2013-01-07 23:00:52.437949000 Z
-          validations: {}
-        56:
-          id: 56
-          name: user_mlsagent
-          display_name: Agent ID
-          step_id: 17
+          created_at: 2012-11-26 18:06:57.745310000Z
+          updated_at: 2012-11-26 18:06:57.745310000Z
+          validations:
+            5:
+              id: 5
+              name: validates_presence_of
+              desc: ''
+              snippet: validates_presence_of :ATTR
+              created_at: 2012-11-21 20:57:02.713302000Z
+              updated_at: 2012-11-21 21:00:29.586165000Z
+            11:
+              id: 11
+              name: validates_numericality_of :number
+              desc: ''
+              snippet: validates_numericality_of :ATTR
+              created_at: 2012-12-07 01:48:59.721007000Z
+              updated_at: 2012-12-07 01:48:59.721007000Z
+        20:
+          id: 20
+          name: user_email_display_confirmation
+          display_name: Confirm Email
+          step_id: 8
           reck: 'false'
-          form_id: 7
+          form_id: 2
           element: input
-          created_at: 2013-01-07 23:05:41.702421000 Z
-          updated_at: 2013-01-07 23:05:41.702421000 Z
-          validations: {}
-        57:
-          id: 57
-          name: user_mlsid
-          display_name: MLS ID
-          step_id: 17
+          created_at: 2012-11-26 18:09:59.024082000Z
+          updated_at: 2012-11-26 18:09:59.024082000Z
+          validations:
+            5:
+              id: 5
+              name: validates_presence_of
+              desc: ''
+              snippet: validates_presence_of :ATTR
+              created_at: 2012-11-21 20:57:02.713302000Z
+              updated_at: 2012-11-21 21:00:29.586165000Z
+        21:
+          id: 21
+          name: user_userpassword_confirmation
+          display_name: Confirm Password
+          step_id: 8
           reck: 'false'
-          form_id: 7
-          element: input
-          created_at: 2013-01-07 23:05:54.772982000 Z
-          updated_at: 2013-01-07 23:05:54.772982000 Z
-          validations: {}
-    18:
-      id: 18
-      form_id: 7
-      name: payment
-      template: office365/steps_custom/accumulus_iframe
-      prev_step_id: 17
-      next_step_id: 
+          form_id: 2
+          element: password
+          created_at: 2012-11-26 18:17:45.098185000Z
+          updated_at: 2012-11-26 18:17:45.098185000Z
+          validations:
+            5:
+              id: 5
+              name: validates_presence_of
+              desc: ''
+              snippet: validates_presence_of :ATTR
+              created_at: 2012-11-21 20:57:02.713302000Z
+              updated_at: 2012-11-21 21:00:29.586165000Z
+    9:
+      id: 9
+      form_id: 2
+      name: confirm
+      template: processor/steps/confirm
+      prev_step_id: 5
+      next_step_id: 11
       position: 3
-      attrs_count: 
-      nav_step: 
-      nav_step_name: 
+      attrs_count: 7
+      nav_step: !!null 
+      nav_step_name: !!null 
       signin_required: false
       before_snippet: ''
       after_snippet: ''
-      created_at: 2013-01-05 00:32:27.276866000 Z
-      updated_at: 2013-01-05 00:33:40.873799000 Z
+      created_at: 2012-11-26 16:36:22.805629000Z
+      updated_at: 2012-12-18 00:47:21.099494000Z
+      attrs:
+        24:
+          id: 24
+          name: user_firstname_display
+          display_name: First Name
+          step_id: 9
+          reck: 'false'
+          form_id: 2
+          element: input
+          created_at: 2012-12-07 01:23:14.173328000Z
+          updated_at: 2012-12-07 01:23:14.173328000Z
+          validations:
+            5:
+              id: 5
+              name: validates_presence_of
+              desc: ''
+              snippet: validates_presence_of :ATTR
+              created_at: 2012-11-21 20:57:02.713302000Z
+              updated_at: 2012-11-21 21:00:29.586165000Z
+            16:
+              id: 16
+              name: validates_length_of 2..60
+              desc: ''
+              snippet: validates_length_of :ATTR, :minimum => 2, :maximum => 60
+              created_at: 2012-12-12 23:49:45.864311000Z
+              updated_at: 2012-12-12 23:49:45.864311000Z
+        25:
+          id: 25
+          name: user_lastname_display
+          display_name: Last Name
+          step_id: 9
+          reck: 'false'
+          form_id: 2
+          element: input
+          created_at: 2012-12-07 01:23:41.774446000Z
+          updated_at: 2012-12-07 01:23:41.774446000Z
+          validations:
+            5:
+              id: 5
+              name: validates_presence_of
+              desc: ''
+              snippet: validates_presence_of :ATTR
+              created_at: 2012-11-21 20:57:02.713302000Z
+              updated_at: 2012-11-21 21:00:29.586165000Z
+            16:
+              id: 16
+              name: validates_length_of 2..60
+              desc: ''
+              snippet: validates_length_of :ATTR, :minimum => 2, :maximum => 60
+              created_at: 2012-12-12 23:49:45.864311000Z
+              updated_at: 2012-12-12 23:49:45.864311000Z
+        26:
+          id: 26
+          name: user_homeaddress_display
+          display_name: Address
+          step_id: 9
+          reck: 'false'
+          form_id: 2
+          element: input
+          created_at: 2012-12-07 01:24:00.364927000Z
+          updated_at: 2012-12-07 01:24:00.364927000Z
+          validations:
+            5:
+              id: 5
+              name: validates_presence_of
+              desc: ''
+              snippet: validates_presence_of :ATTR
+              created_at: 2012-11-21 20:57:02.713302000Z
+              updated_at: 2012-11-21 21:00:29.586165000Z
+            9:
+              id: 9
+              name: validates_length_of max => 256
+              desc: ''
+              snippet: validates_length_of :ATTR, :maximum => 256
+              created_at: 2012-12-07 01:40:06.863330000Z
+              updated_at: 2012-12-07 01:40:06.863330000Z
+        27:
+          id: 27
+          name: user_homecity_display
+          display_name: City
+          step_id: 9
+          reck: 'false'
+          form_id: 2
+          element: input
+          created_at: 2012-12-07 01:24:24.435509000Z
+          updated_at: 2012-12-07 01:24:24.435509000Z
+          validations:
+            5:
+              id: 5
+              name: validates_presence_of
+              desc: ''
+              snippet: validates_presence_of :ATTR
+              created_at: 2012-11-21 20:57:02.713302000Z
+              updated_at: 2012-11-21 21:00:29.586165000Z
+            8:
+              id: 8
+              name: validates_length_of 6..60
+              desc: ''
+              snippet: validates_length_of :ATTR, :minimum => 6, :maximum => 60
+              created_at: 2012-12-07 01:33:59.912796000Z
+              updated_at: 2012-12-07 02:18:13.293468000Z
+        28:
+          id: 28
+          name: user_homestate
+          display_name: State
+          step_id: 9
+          reck: 'false'
+          form_id: 2
+          element: select
+          created_at: 2012-12-07 01:24:41.606758000Z
+          updated_at: 2012-12-07 01:24:41.606758000Z
+          validations:
+            5:
+              id: 5
+              name: validates_presence_of
+              desc: ''
+              snippet: validates_presence_of :ATTR
+              created_at: 2012-11-21 20:57:02.713302000Z
+              updated_at: 2012-11-21 21:00:29.586165000Z
+            13:
+              id: 13
+              name: validates_inclusion_of :state
+              desc: ''
+              snippet: validates_inclusion_of :ATTR, :in => User::STATES_V, :message
+                => "invalid US state"
+              created_at: 2012-12-07 02:09:09.260177000Z
+              updated_at: 2012-12-07 02:20:51.781466000Z
+        29:
+          id: 29
+          name: user_zipcode
+          display_name: ZIP
+          step_id: 9
+          reck: 'false'
+          form_id: 2
+          element: input
+          created_at: 2012-12-07 01:24:55.900980000Z
+          updated_at: 2012-12-07 01:24:55.900980000Z
+          validations:
+            5:
+              id: 5
+              name: validates_presence_of
+              desc: ''
+              snippet: validates_presence_of :ATTR
+              created_at: 2012-11-21 20:57:02.713302000Z
+              updated_at: 2012-11-21 21:00:29.586165000Z
+            10:
+              id: 10
+              name: validates_format_of :zipcode
+              desc: ''
+              snippet: ! 'validates_format_of :ATTR, :with => /^\d{5}(-\d{4})?$/,
+                :message => "should look like: 12345 or 12345-1234"'
+              created_at: 2012-12-07 01:47:36.023102000Z
+              updated_at: 2012-12-12 23:53:50.400545000Z
+        30:
+          id: 30
+          name: offer_seats
+          display_name: Subscription Licenses
+          step_id: 9
+          reck: 'false'
+          form_id: 2
+          element: input
+          created_at: 2012-12-07 01:28:55.638208000Z
+          updated_at: 2012-12-07 01:28:55.638208000Z
+          validations:
+            5:
+              id: 5
+              name: validates_presence_of
+              desc: ''
+              snippet: validates_presence_of :ATTR
+              created_at: 2012-11-21 20:57:02.713302000Z
+              updated_at: 2012-11-21 21:00:29.586165000Z
+            11:
+              id: 11
+              name: validates_numericality_of :number
+              desc: ''
+              snippet: validates_numericality_of :ATTR
+              created_at: 2012-12-07 01:48:59.721007000Z
+              updated_at: 2012-12-07 01:48:59.721007000Z
+    11:
+      id: 11
+      form_id: 2
+      name: accumulus_iframe
+      template: processor/steps_custom/accumulus_iframe
+      prev_step_id: !!null 
+      next_step_id: !!null 
+      position: 4
+      attrs_count: !!null 
+      nav_step: !!null 
+      nav_step_name: !!null 
+      signin_required: false
+      before_snippet: ''
+      after_snippet: ''
+      created_at: 2012-11-26 16:42:47.689970000Z
+      updated_at: 2012-12-06 03:40:31.299769000Z
       attrs: {}
