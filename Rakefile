@@ -1,7 +1,5 @@
 require "bundler/gem_tasks"
 
-require "bundler/gem_tasks"
-
 module Bundler
   class GemHelper
     def rubygem_push(path)
