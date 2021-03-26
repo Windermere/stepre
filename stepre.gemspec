@@ -12,7 +12,7 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{multi-step form gem for rails app}
   gem.homepage      = "http://github.com/windermere/stepre"
 
-  gem.add_dependency('activemodel', '~> 3')
+  gem.add_dependency('activemodel')
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
